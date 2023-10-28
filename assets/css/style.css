@@ -1109,3 +1109,31 @@ section {
     padding-right: 20px 15px;
   }
 }
+
+body {
+  opacity: 0; /* Start with the page content hidden */
+  transition: opacity 0.5s ease; /* Add a smooth fade-in transition */
+}
+
+/* When the page is loaded, reveal the content */
+body.loaded {
+  opacity: 1;
+}
+
+
+/* Default styles for the image */
+.img-fluid {
+  transition: transform 0.3s, filter 0.3s;
+}
+
+/* Zoom and increase brightness on hover */
+.img-fluid:hover {
+  transform: scale(1.2); /* Adjust the scale factor for your desired zoom level */
+  filter: brightness(1.2); /* Adjust the brightness factor for your desired brightness increase */
+}
+
+/* CSS for slightly zooming in on hover */
+.nav-link:hover {
+  transform: scale(1.05); /* Adjust the scale factor for your desired zoom level */
+  transition: transform 0.3s; /* Add a smooth transition effect */
+}

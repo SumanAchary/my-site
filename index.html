@@ -48,10 +48,10 @@
       <div class="d-flex flex-column">
         <div class="profile">
           <img
-            src="assets/img/profile-img.jpg"
-            alt=""
-            class="img-fluid rounded-circle"
-          />
+          src="assets/img/profile-img.jpg"
+          alt=""
+          class="img-fluid rounded-circle"
+        />
           <h1 class="text-light"><a href="index.html">Suman Achary</a></h1>
           <div class="social-links mt-3 text-center">
             <a
@@ -90,6 +90,7 @@
               <a
                 href="https://drive.google.com/file/d/1q9tvVYunZ0dSwkqFknwrFSU6dnOEdEOa/view?usp=drive_link"
                 class="nav-link scrollto"
+                target="_blank"
                 ><i class="bx bx-download"></i> <span>Download Resume</span></a
               >
             </li>
@@ -858,5 +859,11 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+      // Add the "loaded" class to the body element when the page is fully loaded
+      window.addEventListener("load", function () {
+        document.body.classList.add("loaded");
+      });
+    </script>
   </body>
 </html>
