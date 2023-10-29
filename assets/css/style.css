@@ -84,7 +84,7 @@ ul li a {
   z-index: 9997;
   transition: all 0.5s;
   padding: 0 15px;
-  background: #040b14;
+  background: #0c1d36;
   overflow-y: auto;
 }
 
@@ -112,17 +112,17 @@ ul li a {
 }
 
 #header .profile .social-links a {
-  font-size: 18px;
+  font-size: 23px;
   display: inline-block;
-  background: #212431;
-  color: #fff;
+  background: #0a66c2;
+  color: #f5f5f5;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
   border-radius: 50%;
   text-align: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   transition: 0.3s;
 }
 
