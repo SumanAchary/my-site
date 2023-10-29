@@ -112,24 +112,29 @@ ul li a {
 }
 
 #header .profile .social-links a {
-  font-size: 23px;
-  display: inline-block;
-  background: #0a66c2;
+  font-size: 30px; /* Increase the font size for better visibility */
+  display: inline-flex; /* Use flex to vertically center content */
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
+  background: #0c1d36;
   color: #f5f5f5;
-  line-height: 1;
-  padding: 8px 0;
-  margin-right: 4px;
+  padding: 10px; /* Adjust padding for better centering */
+  margin-right: 10px; /* Increased spacing between icons */
   border-radius: 50%;
   text-align: center;
-  width: 40px;
-  height: 40px;
+  width: 51px; /* Increase the width for better proportions */
+  height: 51px; /* Increase the height for better proportions */
   transition: 0.3s;
+  border: 2px solid;
 }
 
 #header .profile .social-links a:hover {
-  background: #149ddd;
-  color: #fff;
+  background: #0076b500; /* LinkedIn theme color on hover */
+  color: #ffffff;
   text-decoration: none;
+  border: 6px double#2eafec; /* Add a border glow with LinkedIn color */
+  border-radius: 50%;
+  transition: 0.1s;
 }
 
 #main {
