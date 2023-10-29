@@ -259,6 +259,7 @@ ul li a {
   left: 0;
   right: 0;
   z-index: 1;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 #hero .hero-container {
@@ -273,6 +274,8 @@ ul li a {
   font-weight: 700;
   line-height: 56px;
   color: #fff;
+  text-shadow: 2px 2px 4px rgba(130, 130, 130, 0.655);
+
 }
 
 #hero p {
@@ -297,7 +300,7 @@ ul li a {
 
 @media (max-width: 768px) {
   #hero h1 {
-    font-size: 28px;
+    font-size: 42px;
     line-height: 36px;
   }
 
@@ -306,6 +309,15 @@ ul li a {
     line-height: 24px;
     margin-bottom: 30px;
   }
+
+/* For mobile screens (max-width: 768px) */
+@media (max-width: 768px) {
+  #hero {
+    background: url("../img/mobile-hero-bg.jpg") top center; /* Use a different image for mobile screens */
+    background-size: cover;
+  }
+}
+
 }
 
 /*--------------------------------------------------------------
