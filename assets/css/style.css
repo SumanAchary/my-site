@@ -9,6 +9,7 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 body {
   font-family: "Open Sans", sans-serif;
   color: #272829;
@@ -613,7 +614,7 @@ section {
   opacity: 1;
   left: 0;
   right: 0;
-  bottom: -60px;
+  bottom: -100px;
   z-index: 3;
   position: absolute;
   transition: all ease-in-out 0.3s;
@@ -621,13 +622,15 @@ section {
   justify-content: center;
 }
 
+
 .portfolio .portfolio-wrap .portfolio-links a {
   color: #fff;
-  font-size: 28px;
+  font-size: 25px;
   text-align: center;
-  background: rgba(20, 157, 221, 0.75);
+  background: rgba(12, 29, 54, 0.774);
   transition: 0.3s;
-  width: 50%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif; /* Professional font */
 }
 
 .portfolio .portfolio-wrap .portfolio-links a:hover {
@@ -739,6 +742,17 @@ section {
   z-index: 2;
   opacity: 0;
 }
+.portfolio .portfolio-wrap .img-fluid {
+  border: 5px solid #f6f5f5;  
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.15); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.portfolio .portfolio-wrap .img-fluid:hover {
+  transform: scale(1.07); /* Slightly enlarge the image on hover */
+}
+
 
 /*--------------------------------------------------------------
 # Services
