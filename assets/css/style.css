@@ -477,15 +477,16 @@ section {
 }
 
 .skills .progress-bar-wrap {
-  background: #dce8f8;
+  background: #e8e8e8;
   height: 10px;
 }
 
 .skills .progress-bar {
   width: 1px;
   height: 10px;
-  transition: 0.9s;
-  background-color: #149ddd;
+  transition: 6s;
+  background: linear-gradient(to right, #0149da,#0088ff); 
+  
 }
 
 /*--------------------------------------------------------------
@@ -713,6 +714,30 @@ section {
 
 .portfolio-details .portfolio-description p {
   padding: 0;
+}
+.portfolio .portfolio-wrap {
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.portfolio .portfolio-wrap:hover {
+  transform: scale(1.1); /* Zoom in */
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.2); /* Add shadow */
+}
+
+.portfolio .portfolio-wrap::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all ease-in-out 0.3s;
+  z-index: 2;
+  opacity: 0;
 }
 
 /*--------------------------------------------------------------
