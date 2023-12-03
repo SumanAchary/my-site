@@ -85,7 +85,7 @@ ul li a {
   z-index: 9997;
   transition: all 0.5s;
   padding: 0 15px;
-  background: #0c1d36;
+  background: #0c1d36ef;
   overflow-y: auto;
 }
 
@@ -1192,4 +1192,19 @@ body.loaded {
 .nav-link:hover {
   transform: scale(1.05); /* Adjust the scale factor for your desired zoom level */
   transition: transform 0.3s; /* Add a smooth transition effect */
+}
+
+
+.company-logo {
+  max-width: 90px; 
+  max-height: auto; 
+  display: inline-block; 
+  margin: 0 0 10px auto; 
+  float: right;
+  vertical-align: middle;  
+  transition: transform 0.5s; 
+}
+
+.company-logo:hover {
+  transform: scale (1.5);  
 }
