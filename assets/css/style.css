@@ -1196,7 +1196,7 @@ body.loaded {
 
 
 .company-logo {
-  max-width: 90px; 
+  max-width: 95px; 
   max-height: auto; 
   display: inline-block; 
   margin: 0 0 10px auto; 
@@ -1205,6 +1205,6 @@ body.loaded {
   transition: transform 0.5s; 
 }
 
-.company-logo:hover {
-  transform: scale (1.5);  
+.company-logo.nist {
+  max-width: 67px;
 }
