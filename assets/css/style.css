@@ -199,23 +199,78 @@ ul li a {
   }
 }
 
+.toast-main-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
 .toast-body p {
   color: #fff;
-  margin-bottom: 20px;
+  margin: 0;
   font-size: 15px;
   font-weight: 600;
-  line-height: 1.4;
-  display: flex;
-  align-items: center;
-  gap: 10px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.funky-text {
+  background: linear-gradient(45deg, #00d2ff, #3498db, #9b59b2, #00d2ff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: funnel-gradient 8s linear infinite;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(0, 210, 255, 0.3));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.8));
+  }
+}
+
+.glitter-container {
+  margin-bottom: 0;
+  text-align: center;
+  line-height: 1;
+}
+
+.glitter-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f1c40f;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  background: linear-gradient(90deg, #f1c40f, #fff, #f39c12, #fff, #f1c40f);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }
 
 .toast-body i {
   font-size: 22px;
   color: #00d2ff;
-  animation: icon-pulse 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.6));
+  animation: icon-pulse 2s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
 }
 
 @keyframes icon-pulse {
