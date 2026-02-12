@@ -36,6 +36,21 @@
 </head>
 
 <body>
+  <!-- ======= Experience Invitation ======= -->
+  <div id="welcome-modal" class="experience-toast">
+    <div class="toast-content">
+      <div class="toast-body">
+        <p><i class="bx bx-music"></i> Want to keep it fun? <img
+            src="https://cdn.pixabay.com/animation/2025/05/09/20/50/20-50-07-841_512.gif" alt="Dancing Chipmunk"
+            class="toast-gif"></p>
+        <div class="toast-actions">
+          <button id="btn-funky" class="toast-btn yes">Yes, please!</button>
+          <button id="btn-standard" class="toast-btn no">No thanks</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
@@ -84,8 +99,8 @@
 
       <div class="sidebar-footer">
         <div class="footer-buttons">
-          <button id="cursor-toggle-btn" class="sidebar-btn">
-            <span>Cursor: <span id="cursor-status">ON</span></span>
+          <button id="cursor-toggle-btn" class="sidebar-btn off">
+            <span>Cursor: <span id="cursor-status">OFF</span></span>
           </button>
           <button id="music-toggle-btn" class="sidebar-btn">
             <span>Music: <span id="music-status">OFF</span></span>
@@ -578,6 +593,9 @@
 
   <!-- Music Control -->
   <script src="assets/js/music-control.js"></script>
+
+  <!-- Welcome Modal -->
+  <script src="assets/js/welcome-modal.js"></script>
 
   <script>
     // Add the "loaded" class to the body element when the page is fully loaded

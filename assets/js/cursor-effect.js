@@ -4,7 +4,7 @@
  */
 
 // Toggle state
-let cursorEffectEnabled = true;
+let cursorEffectEnabled = false;
 
 // Track cursor position
 let mouseX = 0;
@@ -145,4 +145,17 @@ function animate() {
 // Initialize
 if (cursorEffectEnabled) {
     document.body.style.cursor = 'pointer';
+} else {
+    document.body.style.cursor = 'default';
 }
+
+// Global functions for modal access
+window.enableCursorEffect = function () {
+    cursorEffectEnabled = true;
+    document.body.style.cursor = 'pointer';
+    const statusText = document.getElementById('cursor-status');
+    const toggleBtn = document.getElementById('cursor-toggle-btn');
+    if (statusText) statusText.textContent = 'ON';
+    if (toggleBtn) toggleBtn.classList.remove('off');
+};
+
