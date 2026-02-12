@@ -46,11 +46,12 @@
         <img src="assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle" />
         <h1 class="text-light"><a href="index.html">Suman Achary</a></h1>
         <div class="social-links mt-3 text-center">
-          <a href="https://www.linkedin.com/in/gsumanachary/" target="_blank" class="linkedin"><i
-              class="bx bxl-linkedin"></i></a>
-          <a href="https://leetcode.com/G_Suman_Achary/" target="_blank" class="leetcode"><i
-              class="bx bx-code-alt"></i></a>
-          <a href="https://github.com/SumanAchary" target="_blank" class="githun"><i class="bx bxl-github"></i></a>
+          <a href="https://www.linkedin.com/in/gsumanachary/" target="_blank" class="linkedin" data-tooltip="LinkedIn"
+            aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
+          <a href="https://leetcode.com/G_Suman_Achary/" target="_blank" class="leetcode" data-tooltip="LeetCode"
+            aria-label="LeetCode"><i class="bx bx-code-curly"></i></a>
+          <a href="https://github.com/SumanAchary" target="_blank" class="githun" data-tooltip="GitHub"
+            aria-label="GitHub"><i class="bx bxl-github"></i></a>
         </div>
       </div>
 
@@ -80,6 +81,21 @@
         </ul>
       </nav>
       <!-- .nav-menu -->
+
+      <div class="sidebar-footer">
+        <div class="footer-buttons">
+          <button id="cursor-toggle-btn" class="sidebar-btn">
+            <span>Cursor: <span id="cursor-status">ON</span></span>
+          </button>
+          <button id="music-toggle-btn" class="sidebar-btn">
+            <span>Music: <span id="music-status">OFF</span></span>
+          </button>
+        </div>
+        <audio id="bg-music" loop>
+          <source src="assets/tune/moodmode.mp3" type="audio/mpeg">
+        </audio>
+        <p class="small-footer-text">Adjust your experience</p>
+      </div>
     </div>
   </header>
   <!-- End Header -->
@@ -126,11 +142,17 @@
               <h6>Oct 2025 - Present</h6>
               <p><em>Bengaluru, India</em></p>
               <ul>
-                <li>Drive architecture and mentoring across the ADAS Cloud platform.</li>
-                <li>Lead cross-functional design reviews and enforce engineering best practices for scalable
-                  automotive-grade cloud services.</li>
-                <li>Own initiatives to improve system reliability, observability and deployment workflows.</li>
-                <li>Coach and mentor engineers to improve team productivity and delivery.</li>
+                <li>Designed <strong>real-time observability</strong> with <strong>Datadog Agent</strong> and
+                  <strong>custom RUM SDK scripts</strong>, creating production
+                  dashboards for <strong>frontend RUM metrics</strong>, <strong>backend service health</strong>, and
+                  <strong>Jenkins CI pipelines</strong>, reducing
+                  debugging time by <strong>~30%</strong>.
+                </li>
+                <li>Enabled <strong>proactive incident detection</strong> through <strong>automated alerts</strong> and
+                  <strong>stakeholder notifications</strong>,
+                  improving system reliability by <strong>~20%</strong> and reducing response time by
+                  <strong>~25%</strong>.
+                </li>
               </ul>
             </div>
 
@@ -139,13 +161,17 @@
               <h6>Oct 2024 - Oct 2025</h6>
               <p><em>Bengaluru, India</em></p>
               <ul>
-                <li>Reduced release lead time by ~50% by implementing GitLab Runner CI/CD pipelines (YAML &amp; Bash).
+                <li>Reduced release lead time by <strong>~50%</strong> by implementing <strong>GitLab Runner CI/CD
+                    pipelines</strong> (<strong>YAML &amp; Bash</strong>).
                 </li>
-                <li>Containerised services and deployed on AWS Fargate for scalable, cost-efficient hosting.</li>
-                <li>Implemented sticky-session support using AWS Application Load Balancer to improve session
+                <li><strong>Containerised services</strong> and deployed on <strong>AWS Fargate</strong> for scalable,
+                  cost-efficient hosting.</li>
+                <li>Implemented <strong>sticky-session support</strong> using <strong>AWS Application Load
+                    Balancer</strong> to improve session
                   reliability.</li>
-                <li>Built Python tooling to automate Jenkins pipeline interactions via Jenkins REST API.</li>
-                <li>Provided client-facing IDE support, contributing to high CSAT scores.</li>
+                <li>Built <strong>Python tooling</strong> to automate Jenkins pipeline interactions via <strong>Jenkins
+                    REST API</strong>.</li>
+                <li>Provided client-facing IDE support, contributing to <strong>high CSAT scores</strong>.</li>
               </ul>
             </div>
 
@@ -160,13 +186,18 @@
               <h6>Nov 2021 - Oct 2024</h6>
               <p><em>Bengaluru, KA</em></p>
               <ul>
-                <li>Led development of major projects using Flask, Django, MongoDB and AWS, serving 50K+ users with
-                  99.9% uptime.</li>
-                <li>Engineered an advanced fraud detection algorithm leveraging Levenshtein Distance, improving user
-                  verification accuracy by ~90%.</li>
-                <li>Implemented a multi-signature PDF validation system using Protean Gov Technologies API, saving ~200
-                  hours annually.</li>
-                <li>Introduced an internal tech blog to foster knowledge sharing and documentation across the company.
+                <li>Led development of major projects using <strong>Flask</strong>, <strong>Django</strong>,
+                  <strong>MongoDB</strong> and <strong>AWS</strong>, serving <strong>50K+ users</strong> with
+                  <strong>99.9% uptime</strong>.
+                </li>
+                <li>Engineered an advanced <strong>fraud detection algorithm</strong> leveraging <strong>Levenshtein
+                    Distance</strong>, improving user
+                  verification accuracy by <strong>~90%</strong>.</li>
+                <li>Implemented a <strong>multi-signature PDF validation system</strong> using <strong>Protean Gov
+                    Technologies API</strong>, saving <strong>~200
+                    hours annually</strong>.</li>
+                <li>Introduced an <strong>internal tech blog</strong> to foster knowledge sharing and documentation
+                  across the company.
                 </li>
               </ul>
             </div>
@@ -180,10 +211,12 @@
               <h6>Feb 2019 - Sep 2021</h6>
               <p><em>Amazon India, Bengaluru, KA</em></p>
               <ul>
-                <li>Resolved Fulfilment By Amazon (FBA) issues and supported NA &amp; EU marketplaces using internal
+                <li>Resolved <strong>Fulfilment By Amazon (FBA)</strong> issues and supported <strong>NA &amp; EU
+                    marketplaces</strong> using internal
                   mapping tools.</li>
-                <li>Mentored and trained 4 global teams (up to 20 members each), improving operational practices and
-                  proficiency in Python.</li>
+                <li>Mentored and trained <strong>4 global teams</strong> (up to 20 members each), improving operational
+                  practices and
+                  proficiency in <strong>Python</strong>.</li>
               </ul>
             </div>
 
@@ -358,53 +391,34 @@
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/chatbot.png" class="img-fluid" alt="" />
-              <div class="portfolio-links">
-                <a href="https://github.com/SumanAchary/Chatbot_python" target="_blank" class="details-link"
-                  title="More Details">PROJECT LINK</a>
-              </div>
-            </div>
+            <a href="https://github.com/SumanAchary/Chatbot_python" target="_blank" class="portfolio-wrap">
+              <img src="assets/img/portfolio/chatbot.png" class="img-fluid" alt="Chatbot Python" />
+            </a>
           </div>
 
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/covid-notifier.png" class="img-fluid" alt="" />
-              <div class="portfolio-links">
-                <a href="https://github.com/SumanAchary/Covid19-notification" target="_blank" class="details-link"
-                  title="More Details">PROJECT LINK</a>
-              </div>
-            </div>
+            <a href="https://github.com/SumanAchary/Covid19-notification" target="_blank" class="portfolio-wrap">
+              <img src="assets/img/portfolio/covid-notifier.png" class="img-fluid" alt="Covid19 Notification" />
+            </a>
           </div>
 
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/dinobot.png" class="img-fluid" alt="" />
-              <div class="portfolio-links">
-                <a href="https://github.com/SumanAchary/Dino-Bot" target="_blank" class="details-link"
-                  title="More Details">PROJECT LINK</a>
-              </div>
-            </div>
+            <a href="https://github.com/SumanAchary/Dino-Bot" target="_blank" class="portfolio-wrap">
+              <img src="assets/img/portfolio/dinobot.png" class="img-fluid" alt="Dino Bot" />
+            </a>
           </div>
 
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/trailer_maker.png" class="img-fluid" alt="" />
-              <div class="portfolio-links">
-                <a href="https://github.com/SumanAchary/random_video_clip_generator" target="_blank"
-                  class="details-link" title="More Details">PROJECT LINK</a>
-              </div>
-            </div>
+            <a href="https://github.com/SumanAchary/random_video_clip_generator" target="_blank" class="portfolio-wrap">
+              <img src="assets/img/portfolio/trailer_maker.png" class="img-fluid" alt="Trailer Maker" />
+            </a>
           </div>
 
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/killer-shark.png" class="img-fluid" alt="" />
-              <div class="portfolio-links">
-                <a href="https://github.com/SumanAchary/KillerShark_onlyScripts/tree/main/SCRIPT" target="_blank"
-                  class="details-link" title="More Details">PROJECT LINK</a>
-              </div>
-            </div>
+            <a href="https://github.com/SumanAchary/KillerShark_onlyScripts/tree/main/SCRIPT" target="_blank"
+              class="portfolio-wrap">
+              <img src="assets/img/portfolio/killer-shark.png" class="img-fluid" alt="Killer Shark" />
+            </a>
           </div>
         </div>
       </div>
@@ -558,6 +572,13 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Cursor Effect -->
+  <script src="assets/js/cursor-effect.js"></script>
+
+  <!-- Music Control -->
+  <script src="assets/js/music-control.js"></script>
+
   <script>
     // Add the "loaded" class to the body element when the page is fully loaded
     window.addEventListener("load", function () {
