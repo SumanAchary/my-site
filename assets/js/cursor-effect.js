@@ -77,29 +77,7 @@ class Particle {
     }
 }
 
-// Toggle button functionality
-const toggleBtn = document.getElementById('cursor-toggle-btn');
-const statusText = document.getElementById('cursor-status');
-
-if (toggleBtn && statusText) {
-    toggleBtn.addEventListener('click', () => {
-        cursorEffectEnabled = !cursorEffectEnabled;
-
-        if (cursorEffectEnabled) {
-            statusText.textContent = 'ON';
-            toggleBtn.classList.remove('off');
-            document.body.style.cursor = 'pointer';
-        } else {
-            statusText.textContent = 'OFF';
-            toggleBtn.classList.add('off');
-            document.body.style.cursor = 'default';
-            // Clear canvas immediately
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.length = 0;
-            isAnimating = false;
-        }
-    });
-}
+// Toggle button functionality removed - now handled by Vibe Control on the right
 
 // Update cursor position with smart throttling
 document.addEventListener('mousemove', (e) => {
@@ -149,13 +127,20 @@ if (cursorEffectEnabled) {
     document.body.style.cursor = 'default';
 }
 
-// Global functions for modal access
+// Global functions for vibe control access
 window.enableCursorEffect = function () {
+    if (cursorEffectEnabled) return;
     cursorEffectEnabled = true;
     document.body.style.cursor = 'pointer';
-    const statusText = document.getElementById('cursor-status');
-    const toggleBtn = document.getElementById('cursor-toggle-btn');
-    if (statusText) statusText.textContent = 'ON';
-    if (toggleBtn) toggleBtn.classList.remove('off');
+};
+
+window.disableCursorEffect = function () {
+    if (!cursorEffectEnabled) return;
+    cursorEffectEnabled = false;
+    document.body.style.cursor = 'default';
+    // Clear canvas immediately
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.length = 0;
+    isAnimating = false;
 };
 

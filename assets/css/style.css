@@ -15,24 +15,48 @@ html {
   scroll-behavior: smooth;
 }
 
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(to right, #3498db, #e84393);
+  z-index: 10000;
+  transition: width 0.1s ease-out;
+}
+
+/* Fluid Section Transitions */
+section {
+  will-change: transform, opacity;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3498db;
-  /* Bright Blue Scrollbar */
-  border-radius: 5px;
+  background: linear-gradient(to bottom, #3498db, #e84393);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2980b9;
-  /* Darker Blue Hover */
+  background: linear-gradient(to bottom, #2980b9, #d63384);
+  background-clip: content-box;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3498db transparent;
 }
 
 body {
@@ -132,195 +156,238 @@ ul li a {
 }
 
 /*--------------------------------------------------------------
-# Experience Invitation Toast
+# Vibe Control Feature
 --------------------------------------------------------------*/
-.experience-toast {
+.vibe-feature {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 80px;
+  left: 320px;
   z-index: 9999;
-  max-width: 320px;
-  width: calc(100% - 60px);
-  transform: translateY(150%);
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.experience-toast.show {
-  transform: translateY(0);
-}
-
-.toast-content {
-  background: linear-gradient(-45deg, #0c2461, #1e3799, #0a3d62, #0c2461);
-  background-size: 400% 400%;
-  animation: funnel-gradient 10s ease infinite;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(52, 152, 219, 0.2);
-  overflow: hidden;
-  position: relative;
-}
-
-@keyframes funnel-gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.toast-content::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
-  animation: rotate-light 15s linear infinite;
   pointer-events: none;
 }
 
-@keyframes rotate-light {
-  from {
-    transform: rotate(0deg);
+.nav-separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15px 15px 10px 15px;
+  list-style: none;
+}
+
+.vibe-sidebar-link {
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.vibe-sidebar-link i {
+  animation: magic-float 3s ease-in-out infinite;
+}
+
+.vibe-sidebar-link:hover i {
+  color: #3498db !important;
+}
+
+@keyframes magic-float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+    text-shadow: 0 0 0 transparent;
   }
 
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: translateY(-3px) rotate(10deg);
+    color: #3498db;
+    text-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
   }
 }
 
-.toast-main-center {
+.vibe-card {
+  pointer-events: auto;
+  width: 280px;
+  background: rgba(12, 36, 97, 0.85);
+  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transform: translateX(-40px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Disco Lights inside Vibe Card */
+.vibe-card::before,
+.vibe-card::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.vibe-card::before {
+  background: #3498db;
+  top: -60px;
+  left: -60px;
+}
+
+.vibe-card::after {
+  background: #e84393;
+  bottom: -60px;
+  right: -60px;
+}
+
+.vibe-feature.active .vibe-card {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.vibe-card-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.toast-body p {
+.vibe-gif {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+}
+
+.vibe-title {
   color: #fff;
-  margin: 0;
   font-size: 15px;
-  font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.funky-text {
-  background: linear-gradient(45deg, #00d2ff, #3498db, #9b59b2, #00d2ff);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: funnel-gradient 8s linear infinite;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: inline-block;
-}
-
-@keyframes glow-pulse {
-
-  0%,
-  100% {
-    filter: drop-shadow(0 0 2px rgba(0, 210, 255, 0.3));
-  }
-
-  50% {
-    filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.8));
-  }
-}
-
-.glitter-container {
-  margin-bottom: 0;
-  text-align: center;
-  line-height: 1;
-}
-
-.glitter-text {
-  font-size: 14px;
   font-weight: 700;
-  color: #f1c40f;
+  margin: 0;
+  flex: 1;
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: inline-block;
-  background: linear-gradient(90deg, #f1c40f, #fff, #f39c12, #fff, #f1c40f);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 2s linear infinite;
 }
 
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
+.vibe-close-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s;
 }
 
-.toast-body i {
-  font-size: 22px;
-  color: #00d2ff;
-  animation: icon-pulse 2s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
+.vibe-close-btn:hover {
+  color: #fff;
 }
 
-@keyframes icon-pulse {
-
-  0%,
-  100% {
-    transform: scale(1) rotate(0);
-  }
-
-  50% {
-    transform: scale(1.2) rotate(10deg);
-  }
-}
-
-.toast-gif {
-  height: 80px;
-  margin-left: 10px;
-  vertical-align: middle;
-  border-radius: 6px;
-}
-
-.toast-actions {
+.vibe-card-body {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 15px;
 }
 
+.vibe-toggle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Apple Style Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: .4s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #3498db;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #3498db;
+}
+
+input:checked+.slider:before {
+  transform: translateX(20px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Reusing your high-quality button styles */
 .toast-btn {
   flex: 1;
   border: none;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toast-btn.yes {
-  background: #3498db;
+  background: linear-gradient(135deg, #3498db, #2980b9);
   color: #fff;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
 .toast-btn.no {
   background: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .toast-btn.yes:hover {
-  background: #2980b9;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
 
 .toast-btn.no:hover {
@@ -328,12 +395,29 @@ ul li a {
   color: #fff;
 }
 
-@media (max-width: 575px) {
-  .experience-toast {
-    bottom: 20px;
-    right: 20px;
+.vibe-toggle-btn {
+  margin-left: 15px;
+  /* Gap from the card when open */
+}
+
+@media (max-width: 1199px) {
+  .vibe-feature {
     left: 20px;
-    width: auto;
+    bottom: 90px;
+  }
+
+  .vibe-card {
+    transform: translateY(40px) translateX(0);
+  }
+
+  .vibe-feature.active .vibe-card {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .vibe-card {
+    width: 260px;
   }
 }
 
@@ -348,10 +432,11 @@ ul li a {
   width: 300px;
   transition: all ease-in-out 0.5s;
   z-index: 9997;
-  transition: all 0.5s;
   padding: 0 15px;
-  background: #0c2461;
-  /* Deep Navy Sidebar */
+  background: rgba(12, 36, 97, 0.85);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   overflow-y: auto;
 }
 
@@ -410,10 +495,10 @@ ul li a {
 
 /* Sidebar Footer & Control Buttons */
 .sidebar-footer {
-  margin-top: auto;
-  padding: 20px 0;
+  margin-top: 30px;
+  padding: 0 0 40px 0;
+  /* Extra bottom padding for safety */
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-buttons {
@@ -595,20 +680,28 @@ ul li a {
   right: 15px;
   top: 15px;
   z-index: 9998;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 24px;
   transition: all 0.4s;
   outline: none !important;
-  background-color: #555555;
+  background: rgba(12, 36, 97, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   color: #fff;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 0;
-  border-radius: 50px;
+  border-radius: 12px;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav-toggle:hover {
+  background: rgba(52, 152, 219, 0.8);
+  transform: scale(1.05);
 }
 
 .mobile-nav-active {
@@ -1756,39 +1849,8 @@ section {
   }
 }
 
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
-#footer {
-  padding: 12px;
-  color: rgba(244, 246, 253, 0.4);
-  font-size: 11px;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 300px;
-  z-index: 9999;
-  background: #0c2461;
-}
-
-#footer .copyright {
-  text-align: center;
-  letter-spacing: 0.3px;
-}
-
-#footer .credits {
-  padding-top: 4px;
-  text-align: center;
-  font-size: 10px;
-  color: rgba(234, 235, 240, 0.3);
-}
-
 @media (max-width: 1199px) {
-  #footer {
-    position: static;
-    width: auto;
-    padding-right: 20px 15px;
-  }
+  /* Footer styles removed */
 }
 
 body {
@@ -1828,7 +1890,6 @@ body.loaded {
 .company-logo {
   max-width: 95px;
   max-height: auto;
-  display: inline-block;
   margin: 0 0 10px auto;
   float: right;
   vertical-align: middle;

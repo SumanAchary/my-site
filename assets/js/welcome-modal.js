@@ -1,37 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const toast = document.getElementById('welcome-modal');
-    const btnFunky = document.getElementById('btn-funky');
-    const btnStandard = document.getElementById('btn-standard');
+    const vibeFeature = document.getElementById('vibe-control');
+    const vibeToggle = document.getElementById('vibe-toggle');
+    const vibeClose = document.getElementById('vibe-close');
+    const musicToggle = document.getElementById('music-vibe-toggle');
+    const cursorToggle = document.getElementById('cursor-vibe-toggle');
 
-    if (!toast) return;
+    if (!vibeFeature) return;
 
-    // Show toast after a slight delay (2 seconds)
+    // Show feature automatically after a slight delay (2 seconds)
     setTimeout(() => {
-        toast.classList.add('show');
+        vibeFeature.classList.add('active');
     }, 2000);
 
-    // Function to hide toast
-    const hideToast = () => {
-        toast.classList.remove('show');
-        // Optional: remove from DOM after transition
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 800);
-    };
-
-    // 1. Funky (Music + Effects) - triggered if user says "Yes"
-    if (btnFunky) {
-        btnFunky.addEventListener('click', () => {
-            if (window.enableMusic) window.enableMusic();
-            if (window.enableCursorEffect) window.enableCursorEffect();
-            hideToast();
+    // Toggle button logic
+    if (vibeToggle) {
+        vibeToggle.addEventListener('click', () => {
+            vibeFeature.classList.toggle('active');
         });
     }
 
-    // 2. Regular (Standard) - triggered if user says "No"
-    if (btnStandard) {
-        btnStandard.addEventListener('click', () => {
-            hideToast();
+    // Close button logic
+    if (vibeClose) {
+        vibeClose.addEventListener('click', () => {
+            vibeFeature.classList.remove('active');
+        });
+    }
+
+    // Music Toggle Logic
+    if (musicToggle) {
+        musicToggle.addEventListener('change', (e) => {
+            const bgMusic = document.getElementById('bg-music');
+            if (!bgMusic) return;
+
+            if (e.target.checked) {
+                bgMusic.play();
+            } else {
+                bgMusic.pause();
+            }
+        });
+    }
+
+    // Cursor Toggle Logic
+    if (cursorToggle) {
+        cursorToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                if (window.enableCursorEffect) window.enableCursorEffect();
+            } else {
+                if (window.disableCursorEffect) window.disableCursorEffect();
+            }
         });
     }
 });

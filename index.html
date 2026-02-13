@@ -36,18 +36,30 @@
 </head>
 
 <body>
-  <!-- ======= Experience Invitation ======= -->
-  <div id="welcome-modal" class="experience-toast">
-    <div class="toast-content">
-      <div class="toast-body">
-        <div class="toast-main-center">
-          <img src="https://cdn.pixabay.com/animation/2025/05/09/20/50/20-50-07-841_512.gif" alt="Dancing Chipmunk"
-            class="toast-gif">
-          <p class="glitter-container"><span class="glitter-text">⭐ Let's make it FUN! ⭐</span></p>
+  <div id="scroll-progress"></div>
+  <!-- ======= Vibe Control Feature (Card Only) ======= -->
+  <div id="vibe-control" class="vibe-feature card-only">
+    <div class="vibe-card">
+      <div class="vibe-card-header">
+        <h4 class="vibe-title">Vibes</h4>
+        <img src="https://cdn.pixabay.com/animation/2025/05/09/20/50/20-50-07-841_512.gif" alt="Dancing Chipmunk"
+          class="vibe-gif">
+        <button id="vibe-close" class="vibe-close-btn">&times;</button>
+      </div>
+      <div class="vibe-card-body">
+        <div class="vibe-toggle-item">
+          <span>Background Music</span>
+          <label class="switch">
+            <input type="checkbox" id="music-vibe-toggle" aria-label="Toggle Background Music">
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="toast-actions">
-          <button id="btn-funky" class="toast-btn yes">Yes, please!</button>
-          <button id="btn-standard" class="toast-btn no">No thanks</button>
+        <div class="vibe-toggle-item">
+          <span>Magic Cursor</span>
+          <label class="switch">
+            <input type="checkbox" id="cursor-vibe-toggle" aria-label="Toggle Magic Cursor Effect">
+            <span class="slider round"></span>
+          </label>
         </div>
       </div>
     </div>
@@ -95,23 +107,23 @@
             <a href="https://drive.google.com/file/d/1q9tvVYunZ0dSwkqFknwrFSU6dnOEdEOa/view?usp=drive_link"
               class="nav-link scrollto" target="_blank"><i class="bx bx-download"></i> <span>Download Resume</span></a>
           </li>
+          <li class="nav-separator"></li>
+          <li>
+            <a href="javascript:void(0)" id="vibe-toggle" class="nav-link vibe-sidebar-link">
+              <i class="bi bi-magic"></i> <span>Vibes</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- .nav-menu -->
 
       <div class="sidebar-footer">
         <div class="footer-buttons">
-          <button id="cursor-toggle-btn" class="sidebar-btn off">
-            <span>Cursor Effect : <span id="cursor-status">OFF</span></span>
-          </button>
-          <button id="music-toggle-btn" class="sidebar-btn">
-            <span>Music: <span id="music-status">OFF</span></span>
-          </button>
+          <!-- Experience controls integrated into Nav Menu -->
         </div>
         <audio id="bg-music" loop>
           <source src="assets/tune/moodmode.mp3" type="audio/mpeg">
         </audio>
-        <p class="small-footer-text">Adjust your experience</p>
       </div>
     </div>
   </header>
@@ -562,16 +574,7 @@
   </main>
   <!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright
-        <strong><span>Suman <b>Achary</b></span></strong>
-      </div>
-    </div>
-  </footer>
-  <!-- End  Footer -->
+  <!-- Footer removed to avoid overlap with sidebar controls -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
@@ -589,6 +592,9 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Fluid Scroll Effects -->
+  <script src="assets/js/fluid-scroll.js"></script>
 
   <!-- Cursor Effect -->
   <script src="assets/js/cursor-effect.js"></script>
