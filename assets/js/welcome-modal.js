@@ -50,4 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Matrix Mode Toggle Logic
+    const matrixToggle = document.getElementById('matrix-vibe-toggle');
+    if (matrixToggle) {
+        matrixToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.classList.add('matrix-mode');
+            } else {
+                document.body.classList.remove('matrix-mode');
+            }
+        });
+    }
 });

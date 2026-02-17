@@ -36,6 +36,7 @@
 </head>
 
 <body>
+  <canvas id="matrix-canvas"></canvas>
   <div id="scroll-progress"></div>
   <!-- ======= Vibe Control Feature (Card Only) ======= -->
   <div id="vibe-control" class="vibe-feature card-only">
@@ -58,6 +59,13 @@
           <span>Magic Skills</span>
           <label class="switch">
             <input type="checkbox" id="cursor-vibe-toggle" aria-label="Toggle Magic Cursor Effect">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="vibe-toggle-item">
+          <span>Matrix Mode</span>
+          <label class="switch">
+            <input type="checkbox" id="matrix-vibe-toggle" aria-label="Toggle Matrix Mode">
             <span class="slider round"></span>
           </label>
         </div>
@@ -131,14 +139,17 @@
   </header>
   <!-- End Header -->
 
+
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="hero-container" data-aos="fade-in">
-      <h1>Suman Achary</h1>
-      <p>
-        I'm a
-        <span class="typed" data-typed-items="Techie"></span>
-      </p>
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1>Suman Achary</h1>
+        <p>I'm a <span class="highlight">Software Engineer</span> building <br>
+          <span class="typed"
+            data-typed-items="Distributed Systems, High-Availability Systems, Low Latency Backend Services"></span>
+        </p>
+      </div>
     </div>
   </section>
   <!-- End Hero -->
@@ -151,9 +162,12 @@
         <div class="section-title">
           <h2>Timeline</h2>
           <p>
-            Let's journey through my experiences - a blend of education and
-            professional growth - as timelines that have shaped my path to
-            this point.
+            Backend Engineer with 7+ years of experience designing and scaling
+            distributed systems using Python (Flask/Django). Proven expertise in building
+            high-availability, low-latency microservices on AWS serving 50K+ users
+            with 99.9% uptime. Strong focus on backend scalability, system reliability,
+            and engineering leadership—mentoring teams, improving performance, and
+            driving automation across cloud environments.
           </p>
         </div>
 
@@ -163,15 +177,16 @@
             <!-- Professional Experience -->
             <h3 class="resume-title">Professional Experience</h3>
 
-            <!-- KPIT grouped company entry with sub-timeline for roles -->
             <div class="resume-item">
               <h4>
                 KPIT Technologies
                 <img class="company-logo" src="assets/img/companies/kpit.jpg" alt="KPIT logo" />
               </h4>
               <h5>Technical Leader</h5>
-              <h6>Oct 2025 - Present</h6>
+              <h6>10/2025 - Present</h6>
               <p><em>Bengaluru, India</em></p>
+              <p><em>KPIT is a global partner to the Automotive Industry and Mobility Ecosystem for making
+                  software-defined vehicles a reality.</em></p>
               <ul>
                 <li>Designed <strong>real-time observability</strong> with <strong>Datadog Agent</strong> and
                   <strong>custom RUM SDK scripts</strong>, creating production
@@ -188,21 +203,19 @@
             </div>
 
             <div class="resume-item">
-              <h5>Senior Software Engineer</h5>
-              <h6>Oct 2024 - Oct 2025</h6>
+              <h5>Senior Software Engineer (Subcon)</h5>
+              <h6>10/2024 - 09/2025</h6>
               <p><em>Bengaluru, India</em></p>
               <ul>
-                <li>Reduced release lead time by <strong>~50%</strong> by implementing <strong>GitLab Runner CI/CD
-                    pipelines</strong> (<strong>YAML &amp; Bash</strong>).
+                <li>Automated <strong>CI/CD pipelines</strong> using <strong>GitLab Runners</strong> and
+                  <strong>YAML</strong>,
+                  reducing manual deployment effort by <strong>~50-60%</strong> and improving release consistency.
                 </li>
-                <li><strong>Containerised services</strong> and deployed on <strong>AWS Fargate</strong> for scalable,
-                  cost-efficient hosting.</li>
-                <li>Implemented <strong>sticky-session support</strong> using <strong>AWS Application Load
-                    Balancer</strong> to improve session
-                  reliability.</li>
-                <li>Built <strong>Python tooling</strong> to automate Jenkins pipeline interactions via <strong>Jenkins
-                    REST API</strong>.</li>
-                <li>Provided client-facing IDE support, contributing to <strong>high CSAT scores</strong>.</li>
+                <li><strong>Containerized</strong> and deployed <strong>8+ backend services</strong> on <strong>AWS
+                    Fargate</strong>,
+                  enabling horizontal scaling and reducing infrastructure costs by <strong>~20%</strong>.</li>
+                <li>Designed and implemented <strong>session-handling strategy</strong> using <strong>AWS ALB</strong>
+                  and target groups to support fault-tolerant user traffic.</li>
               </ul>
             </div>
 
@@ -214,40 +227,48 @@
                 Software Developer
               </h5>
 
-              <h6>Nov 2021 - Oct 2024</h6>
+              <h6>11/2021 - 10/2024</h6>
               <p><em>Bengaluru, KA</em></p>
+              <p><em>A technology solutions firm focusing on cloud-based platforms and innovations.</em></p>
               <ul>
-                <li>Led development of major projects using <strong>Flask</strong>, <strong>Django</strong>,
-                  <strong>MongoDB</strong> and <strong>AWS</strong>, serving <strong>50K+ users</strong> with
-                  <strong>99.9% uptime</strong>.
+                <li>Engineered and implemented <strong>fraud detection algorithm</strong> leveraging <strong>Levenshtein
+                    Distance</strong>, achieving a <strong>90% improvement</strong> in user verification accuracy.
                 </li>
-                <li>Engineered an advanced <strong>fraud detection algorithm</strong> leveraging <strong>Levenshtein
-                    Distance</strong>, improving user
-                  verification accuracy by <strong>~90%</strong>.</li>
                 <li>Implemented a <strong>multi-signature PDF validation system</strong> using <strong>Protean Gov
-                    Technologies API</strong>, saving <strong>~200
-                    hours annually</strong>.</li>
-                <li>Introduced an <strong>internal tech blog</strong> to foster knowledge sharing and documentation
-                  across the company.
-                </li>
+                    Technologies API</strong>, saving <strong>200+ hours annually</strong>.</li>
+                <li>Led development of major projects serving <strong>50,000+ users</strong> with <strong>99.9%
+                    uptime</strong>.</li>
               </ul>
             </div>
 
             <div class="resume-item">
               <h4>
-                Amazon.com
+                Amazon
                 <img class="company-logo" src="assets/img/companies/amazon.png" alt="Amazon logo" />
               </h4>
-              <h5>Associate</h5>
-              <h6>Feb 2019 - Sep 2021</h6>
-              <p><em>Amazon India, Bengaluru, KA</em></p>
+              <h5>FBA Associate</h5>
+              <h6>02/2019 - 09/2021</h6>
+              <p><em>Bengaluru, India</em></p>
+              <p><em>A global tech company specializing in e-commerce, cloud, and AI.</em></p>
               <ul>
-                <li>Resolved <strong>Fulfilment By Amazon (FBA)</strong> issues and supported <strong>NA &amp; EU
-                    marketplaces</strong> using internal
-                  mapping tools.</li>
-                <li>Mentored and trained <strong>4 global teams</strong> (up to 20 members each), improving operational
-                  practices and
-                  proficiency in <strong>Python</strong>.</li>
+                <li>Mentored and trained <strong>4+ global teams</strong>, each comprising up to 20 members, enhancing
+                  their proficiency in <strong> Eurpean and North American Amazon FBA Marketplace </strong> and <strong>
+                    strong problem solving skills </strong>.</li>
+              </ul>
+            </div>
+
+            <!-- Key Achievements -->
+            <h3 class="resume-title">Key Achievements</h3>
+            <div class="resume-item">
+              <ul>
+                <li><strong>High Flyer Award:</strong> Received twice for outstanding backend delivery and system
+                  scalability (Honda Japan – KPIT, 2025).</li>
+                <li><strong>High CSAT Score:</strong> Awarded for customer satisfaction and engineering excellence
+                  (Honda Japan - KPIT 2024).</li>
+                <li><strong>High Availability and Scalable Development:</strong> Led development of two major projects
+                  serving 50,000+ users with 99.9% uptime at eSthenos.</li>
+                <li><strong>Enhanced Fraud Detection:</strong> Achieved 90% improvement in user verification accuracy
+                  with advanced algorithm at eSthenos.</li>
               </ul>
             </div>
 
@@ -258,14 +279,27 @@
                 Bachelor of Technology in Computer Science and Engineering
                 <img class="company-logo nist" src="assets/img/companies/nist.png" alt="nist logo" />
               </h4>
-              <h5>2014 - 2019</h5>
-              <p><em>National Institute of Science and Technology, Berhampur, OD</em></p>
+              <h5>08/2014 - 03/2019</h5>
+              <p><em>National Institute of Science and Technology, Biju Pattnaik University of Technology, India</em>
+              </p>
               <p>
                 I completed my Bachelor of Technology in Computer Science and Engineering at the National Institute of
                 Science and Technology. My coursework included subjects like Data Structures, Artificial Intelligence,
                 and Database Management Systems. I was actively involved in the Entrepreneurship Development Club, where
                 I promoted entrepreneurship within the college community.
               </p>
+            </div>
+
+            <div class="resume-item">
+              <h4>High School, Intermediate</h4>
+              <h5>06/2012 - 05/2014</h5>
+              <p><em>City College Berhampur, Council of Higher Secondary Education, India</em></p>
+            </div>
+
+            <div class="resume-item">
+              <h4>Schooling</h4>
+              <h5>07/1998 - 05/2011</h5>
+              <p><em>Bidya Bhavan EM School, Indian Certificate of Secondary Education, India</em></p>
             </div>
 
             <!-- MOOCS and Certificates -->
@@ -428,6 +462,7 @@
             <a href="https://github.com/SumanAchary/Chatbot_python" target="_blank" rel="noopener noreferrer"
               class="portfolio-wrap">
               <img src="assets/img/portfolio/chatbot.png" class="img-fluid" alt="Chatbot Python" />
+              <h4 class="portfolio-title">Chatbot Python</h4>
             </a>
           </div>
 
@@ -435,6 +470,7 @@
             <a href="https://github.com/SumanAchary/Covid19-notification" target="_blank" rel="noopener noreferrer"
               class="portfolio-wrap">
               <img src="assets/img/portfolio/covid-notifier.png" class="img-fluid" alt="Covid19 Notification" />
+              <h4 class="portfolio-title">Covid19 Notification</h4>
             </a>
           </div>
 
@@ -442,6 +478,7 @@
             <a href="https://github.com/SumanAchary/Dino-Bot" target="_blank" rel="noopener noreferrer"
               class="portfolio-wrap">
               <img src="assets/img/portfolio/dinobot.png" class="img-fluid" alt="Dino Bot" />
+              <h4 class="portfolio-title">Dino Bot</h4>
             </a>
           </div>
 
@@ -449,6 +486,7 @@
             <a href="https://github.com/SumanAchary/random_video_clip_generator" target="_blank"
               rel="noopener noreferrer" class="portfolio-wrap">
               <img src="assets/img/portfolio/trailer_maker.png" class="img-fluid" alt="Trailer Maker" />
+              <h4 class="portfolio-title">Trailer Maker</h4>
             </a>
           </div>
 
@@ -456,6 +494,7 @@
             <a href="https://github.com/SumanAchary/KillerShark_onlyScripts/tree/main/SCRIPT" target="_blank"
               rel="noopener noreferrer" class="portfolio-wrap">
               <img src="assets/img/portfolio/killer-shark.png" class="img-fluid" alt="Killer Shark" />
+              <h4 class="portfolio-title">Killer Shark</h4>
             </a>
           </div>
         </div>
@@ -613,6 +652,9 @@
 
   <!-- Welcome Modal -->
   <script src="assets/js/welcome-modal.js"></script>
+
+  <!-- Matrix Rain Effect -->
+  <script src="assets/js/matrix-rain.js"></script>
 
   <script>
     // Add the "loaded" class to the body element when the page is fully loaded
