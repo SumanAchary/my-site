@@ -738,6 +738,19 @@ input:checked+.slider:before {
   position: relative;
   z-index: 2;
   min-width: 300px;
+  animation: hero-fade-in 0.8s ease-out forwards;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #hero h1 {
@@ -755,6 +768,37 @@ input:checked+.slider:before {
   margin-bottom: 50px;
   font-size: 26px;
   font-family: "Roboto", sans-serif;
+  margin-top: 20px;
+}
+
+.hero-content {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 30px 50px;
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.highlight {
+  color: #3498db;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: none;
+}
+
+#hero .typed {
+  display: inline-block;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  min-height: 32px;
+  /* Stable height for 26px font */
+  margin-top: 10px;
 }
 
 #hero p span {
@@ -762,7 +806,11 @@ input:checked+.slider:before {
   padding-bottom: 4px;
   letter-spacing: 1px;
   border-bottom: 3px solid #3498db;
-  /* Bright Blue Hero Underline */
+}
+
+#hero p span.highlight {
+  border-bottom: none;
+  /* Keep the highlight clean */
 }
 
 @media (min-width: 1024px) {
@@ -1898,4 +1946,464 @@ body.loaded {
 
 .company-logo.nist {
   max-width: 67px;
+}
+
+/*--------------------------------------------------------------
+# Matrix Mode theme
+--------------------------------------------------------------*/
+#matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: none;
+  background: #000;
+}
+
+body.matrix-mode #matrix-canvas {
+  display: block;
+}
+
+body.matrix-mode {
+  background-color: transparent !important;
+  color: #00ff41 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+body.matrix-mode * {
+  font-family: 'Courier New', Courier, monospace !important;
+  border-color: #00ff41 !important;
+  color: #00ff41 !important;
+}
+
+body.matrix-mode #main section {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Specific visibility fixes for icons - Replaced with Arrow Bullets in Matrix Mode */
+body.matrix-mode i,
+body.matrix-mode .bi,
+body.matrix-mode [class^="bi-"],
+body.matrix-mode .bx,
+body.matrix-mode [class^="bx-"],
+body.matrix-mode .nav-menu a i {
+  color: #00ff41 !important;
+  opacity: 1 !important;
+  font-weight: bold !important;
+}
+
+body.matrix-mode i::before,
+body.matrix-mode .bi::before,
+body.matrix-mode [class^="bi-"]::before,
+body.matrix-mode .bx::before,
+body.matrix-mode [class^="bx-"]::before {
+  content: "> " !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+body.matrix-mode #header,
+body.matrix-mode .section-bg,
+body.matrix-mode .vibe-card,
+body.matrix-mode .hero-content {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid #00ff41 !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  backdrop-filter: blur(15px) !important;
+}
+
+body.matrix-mode .resume .resume-item::before {
+  background: #00ff41 !important;
+}
+
+body.matrix-mode #header .profile h1 a,
+body.matrix-mode #hero h1,
+body.matrix-mode .section-title h2,
+body.matrix-mode .resume-title,
+body.matrix-mode .resume-item h4,
+body.matrix-mode .resume-item h5,
+body.matrix-mode .skills .skill,
+body.matrix-mode .portfolio #portfolio-flters li {
+  color: #00ff41 !important;
+  text-shadow: 0 0 12px rgba(0, 255, 65, 1) !important;
+  text-transform: uppercase;
+}
+
+body.matrix-mode .nav-menu a {
+  color: rgba(0, 255, 65, 0.8) !important;
+}
+
+body.matrix-mode .nav-menu a:hover,
+body.matrix-mode .nav-menu .active,
+body.matrix-mode .nav-menu li:hover>a {
+  background: rgba(0, 255, 65, 0.2) !important;
+  color: #00ff41 !important;
+}
+
+body.matrix-mode .progress-bar {
+  background-color: #00ff41 !important;
+}
+
+body.matrix-mode .progress {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid #00ff41;
+}
+
+body.matrix-mode .highlight {
+  background: #00ff41 !important;
+  color: #000 !important;
+  padding: 2px 8px;
+  border-radius: 0;
+  text-shadow: none !important;
+}
+
+body.matrix-mode .back-to-top {
+  background: #00ff41 !important;
+}
+
+body.matrix-mode .back-to-top i {
+  color: #000 !important;
+}
+
+/* Digital Rain Overlay (Scanlines) */
+body.matrix-mode::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 255, 65, 0.05) 50%, rgba(0, 0, 0, 0) 50%);
+  background-size: 100% 4px;
+  z-index: 10001;
+  pointer-events: none;
+  opacity: 0.2;
+  animation: scanning 8s linear infinite;
+}
+
+@keyframes scanning {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 100%;
+  }
+}
+
+body.matrix-mode #hero {
+  background: transparent !important;
+}
+
+body.matrix-mode #hero::before {
+  background: transparent !important;
+}
+
+body.matrix-mode .company-logo {
+  filter: grayscale(100%) brightness(150%) sepia(100%) hue-rotate(90deg) saturate(500%) !important;
+}
+
+body.matrix-mode #scroll-progress {
+  background: #00ff41 !important;
+}
+
+/* Matrix Mode Experience Section Re-design */
+body.matrix-mode .resume .resume-item {
+  border-left: none !important;
+  margin-bottom: 30px;
+  background: rgba(0, 255, 65, 0.03) !important;
+  border: 1px solid rgba(0, 255, 65, 0.3) !important;
+  padding: 20px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+body.matrix-mode .resume .resume-item::before {
+  content: "ENTRY_LOG::" !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #00ff41 !important;
+  color: #000 !important;
+  font-size: 10px !important;
+  font-weight: bold !important;
+  padding: 2px 8px !important;
+  border-radius: 0 0 0 8px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+body.matrix-mode .resume .resume-item h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body.matrix-mode .resume .resume-item h4::before {
+  content: "> ACCESSING: ";
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+body.matrix-mode .resume .resume-item h5::before {
+  content: "[ROLE]: ";
+  opacity: 0.7;
+}
+
+body.matrix-mode .resume .resume-item h6::before {
+  content: "[TIME_STAMP]: ";
+  opacity: 0.7;
+}
+
+body.matrix-mode .resume .resume-item ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-top: 15px !important;
+}
+
+body.matrix-mode .resume .resume-item ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  border: none !important;
+}
+
+body.matrix-mode .resume .resume-item ul li::before {
+  content: "√" !important;
+  position: absolute;
+  left: 0;
+  color: #00ff41 !important;
+  font-weight: bold;
+}
+
+body.matrix-mode .resume .resume-title::before {
+  content: "// ";
+}
+
+body.matrix-mode .resume .resume-title {
+  border-bottom: 2px solid #00ff41;
+  display: inline-block;
+  padding-right: 20px;
+}
+
+body.matrix-mode .company-logo {
+  float: none !important;
+  margin: 10px 0 !important;
+  display: inline-block !important;
+  border: 1px solid #00ff41 !important;
+}
+
+body.matrix-mode .resume .resume-item:hover {
+  background: rgba(0, 255, 65, 0.08) !important;
+  border-color: #00ff41 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2) !important;
+  transform: scale(1.02) !important;
+}
+
+body.matrix-mode .resume .resume-item p em::before {
+  content: "[LOC]: ";
+  opacity: 0.7;
+}
+
+body.matrix-mode .portfolio-wrap img {
+  filter: grayscale(100%) brightness(80%) sepia(100%) hue-rotate(90deg) saturate(300%);
+}
+
+body.matrix-mode .portfolio-wrap:hover img {
+  filter: none;
+}
+
+/* Hide company logos in Matrix Mode */
+body.matrix-mode .company-logo {
+  display: none !important;
+}
+
+/* Matrix Mode Skills Redesign */
+body.matrix-mode .skills .progress {
+  height: auto !important;
+  margin-bottom: 25px !important;
+  background: transparent !important;
+}
+
+body.matrix-mode .skills .progress .skill {
+  color: #00ff41 !important;
+  font-size: 14px !important;
+  letter-spacing: 1px !important;
+  margin-bottom: 10px !important;
+}
+
+body.matrix-mode .skills .progress-bar-wrap {
+  background: rgba(0, 255, 65, 0.1) !important;
+  height: 24px !important;
+  border: 1px solid #00ff41 !important;
+  border-radius: 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+body.matrix-mode .skills .progress-bar {
+  background: #00ff41 !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  animation: none !important;
+  position: relative;
+}
+
+/* Add a terminal-style block effect to the progress bar */
+body.matrix-mode .skills .progress-bar::after {
+  content: "################################################################################" !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #000 !important;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  letter-spacing: 2px !important;
+  white-space: nowrap !important;
+  opacity: 0.8 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+}
+
+body.matrix-mode .skills .progress-bar::before {
+  display: none !important;
+}
+
+body.matrix-mode .skills .progress-bar-wrap::before {
+  content: "[..................................................]" !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 255, 65, 0.3) !important;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  letter-spacing: 2.2px !important;
+  padding-left: 5px;
+  z-index: 0;
+}
+
+/* Default hide project titles to preserve original UI */
+.portfolio-title {
+  display: none;
+}
+
+body.matrix-mode .portfolio-title {
+  display: block !important;
+  color: #00ff41 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  margin: 10px 0 !important;
+}
+
+body.matrix-mode .skills .progress:hover .progress-bar {
+  filter: brightness(1.5) drop-shadow(0 0 5px #00ff41) !important;
+}
+
+/* Matrix Mode Testimonials Redesign */
+body.matrix-mode .testimonials .testimonial-item p {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border-left: 5px solid #00ff41 !important;
+  color: #00ff41 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2) !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+body.matrix-mode .testimonials .testimonial-item p::before {
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.3) !important;
+}
+
+body.matrix-mode .testimonials .testimonial-item .quote-icon-left,
+body.matrix-mode .testimonials .testimonial-item .quote-icon-right {
+  color: rgba(0, 255, 65, 0.5) !important;
+}
+
+body.matrix-mode .testimonials .testimonial-item h3,
+body.matrix-mode .testimonials .testimonial-item h4 {
+  color: #00ff41 !important;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.8) !important;
+}
+
+body.matrix-mode .testimonials .testimonial-item .testimonial-img {
+  display: none !important;
+}
+
+body.matrix-mode .testimonials .swiper-pagination .swiper-pagination-bullet {
+  background-color: rgba(0, 255, 65, 0.3) !important;
+  border: 1px solid #00ff41 !important;
+}
+
+body.matrix-mode .testimonials .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #00ff41 !important;
+}
+
+/* Matrix Mode Projects Redesign */
+body.matrix-mode .portfolio #portfolio-flters {
+  border: 1px solid #00ff41 !important;
+  padding: 10px !important;
+  background: rgba(0, 255, 65, 0.05) !important;
+}
+
+body.matrix-mode .portfolio-item img {
+  display: none !important;
+}
+
+body.matrix-mode .portfolio-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: 150px !important;
+  background: rgba(0, 255, 65, 0.05) !important;
+  border: 1px dashed #00ff41 !important;
+  padding: 20px !important;
+  text-align: center !important;
+  position: relative !important;
+}
+
+body.matrix-mode .portfolio-wrap::before {
+  content: "[ DECODED_FILE ]" !important;
+  display: block !important;
+  position: static !important;
+  background: transparent !important;
+  font-size: 10px !important;
+  margin-bottom: 15px !important;
+  color: #00ff41 !important;
+  opacity: 0.7 !important;
+}
+
+body.matrix-mode .portfolio-wrap::after {
+  content: "RUN show_me_code.exe" !important;
+  display: block !important;
+  margin-top: 15px !important;
+  font-size: 12px !important;
+  border: 1px solid #00ff41 !important;
+  padding: 5px 15px !important;
+  background: rgba(0, 255, 65, 0.1) !important;
+}
+
+body.matrix-mode .portfolio-wrap:hover {
+  background: rgba(0, 255, 65, 0.15) !important;
+  border-style: solid !important;
+  box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.3) !important;
+}
+
+body.matrix-mode .portfolio-item .portfolio-wrap img {
+  filter: none !important;
+  /* Not needed since hidden, but for safety */
+}
+
+/* Re-inject project titles since images are gone */
+body.matrix-mode .portfolio-wrap h4 {
+  color: #00ff41 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
 }
