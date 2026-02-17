@@ -342,7 +342,7 @@ ul li a {
 }
 
 input:checked+.slider {
-  background-color: #3498db;
+  background-color: #173510;
 }
 
 input:focus+.slider {
