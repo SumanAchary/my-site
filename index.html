@@ -7,20 +7,20 @@
 
   <title>Suman Achary Portfolio</title>
 
-  <meta charset="UTF-8" />
   <meta name="description"
     content="Suman Achary's personal portfolio website. Learn more about Suman Achary's work, skills, and professional experience." />
   <meta name="keywords" content="Suman Achary, Portfolio, Software Developer, Tech Enthusiast, Music lover" />
   <meta name="author" content="Suman Achary" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon" />
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Poppins (headings) + Inter (body) — clean and modern -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
 
   <!-- Vendor CSS Files -->
@@ -37,24 +37,23 @@
 
 <body>
   <canvas id="matrix-canvas"></canvas>
+  <canvas id="sparks-canvas"></canvas>
   <div id="scroll-progress"></div>
-  <!-- ======= Vibe Control Feature (Card Only) ======= -->
+  <!-- ======= Music Mute Button (slides in from left) ======= -->
+  <button id="music-btn" class="music-fab" type="button" aria-label="Mute background music" aria-pressed="false">
+    <i class="bi bi-volume-up-fill icon-on"></i>
+    <i class="bi bi-volume-mute-fill icon-off"></i>
+    <span class="music-fab-label">Music on</span>
+  </button>
+
+  <!-- DORMANT: Vibe Control card (Magic Skills + Matrix Mode) removed from UI, kept for future re-enable.
   <div id="vibe-control" class="vibe-feature card-only">
     <div class="vibe-card">
       <div class="vibe-card-header">
         <h4 class="vibe-title">Vibes</h4>
-        <img src="https://cdn.pixabay.com/animation/2025/05/09/20/50/20-50-07-841_512.gif" alt="Dancing Chipmunk"
-          class="vibe-gif">
         <button id="vibe-close" class="vibe-close-btn">&times;</button>
       </div>
       <div class="vibe-card-body">
-        <div class="vibe-toggle-item">
-          <span>Background Music</span>
-          <label class="switch">
-            <input type="checkbox" id="music-vibe-toggle" aria-label="Toggle Background Music">
-            <span class="slider round"></span>
-          </label>
-        </div>
         <div class="vibe-toggle-item">
           <span>Magic Skills</span>
           <label class="switch">
@@ -65,22 +64,25 @@
         <div class="vibe-toggle-item">
           <span>Matrix Mode</span>
           <label class="switch">
-            <input type="checkbox" id="matrix-vibe-toggle" aria-label="Toggle Matrix Mode">
+            <input type="checkbox" id="matrix-vibe-toggle" aria-label="Toggle Matrix Mode" checked>
             <span class="slider round"></span>
           </label>
         </div>
       </div>
     </div>
   </div>
+  -->
+
 
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
   <!-- ======= Header ======= -->
   <header id="header">
+    <canvas id="sidebar-smoke"></canvas>
     <div class="d-flex flex-column">
       <div class="profile">
-        <img src="assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle" />
+        <img src="assets/img/profile-img.jpg" alt="Suman Achary" class="img-fluid rounded-circle" />
         <h1 class="text-light"><a href="index.html">Suman Achary</a></h1>
         <div class="social-links mt-3 text-center">
           <a href="https://www.linkedin.com/in/gsumanachary/" target="_blank" rel="noopener noreferrer" class="linkedin"
@@ -98,8 +100,7 @@
             <a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a>
           </li>
           <li>
-            <a href="#timeline" class="nav-link scrollto"><i class="bx bx-time-five"></i> <span>Professional
-                Experience</span></a>
+            <a href="#timeline" class="nav-link scrollto"><i class="bx bx-time-five"></i> <span>Experience</span></a>
           </li>
           <li>
             <a href="#skills" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Skills</span></a>
@@ -113,24 +114,19 @@
           </li>
 
           <li>
+            <a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a>
+          </li>
+
+          <li>
             <a href="https://drive.google.com/file/d/1q9tvVYunZ0dSwkqFknwrFSU6dnOEdEOa/view?usp=drive_link"
               class="nav-link" target="_blank" rel="noopener noreferrer"><i class="bx bx-download"></i> <span>Download
                 Resume</span></a>
-          </li>
-          <li class="nav-separator"></li>
-          <li>
-            <a href="javascript:void(0)" id="vibe-toggle" class="nav-link vibe-sidebar-link">
-              <i class="bi bi-magic"></i> <span>Vibes</span>
-            </a>
           </li>
         </ul>
       </nav>
       <!-- .nav-menu -->
 
       <div class="sidebar-footer">
-        <div class="footer-buttons">
-          <!-- Experience controls integrated into Nav Menu -->
-        </div>
         <audio id="bg-music" loop>
           <source src="assets/tune/moodmode.mp3" type="audio/mpeg">
         </audio>
@@ -151,6 +147,14 @@
         </p>
       </div>
     </div>
+
+    <!-- Scroll-down indicator -->
+    <a href="#timeline" class="scroll-down scrollto" aria-label="Scroll down">
+      <span class="scroll-down-text">Scroll</span>
+      <span class="scroll-down-icon">
+        <i class="bx bx-chevron-down"></i>
+      </span>
+    </a>
   </section>
   <!-- End Hero -->
 
@@ -160,14 +164,15 @@
     <section id="timeline" class="resume">
       <div class="container">
         <div class="section-title">
-          <h2>Timeline</h2>
+          <h2>Experience</h2>
           <p>
-            Backend Engineer with 7+ years of experience designing and scaling
-            distributed systems using Python (Flask/Django). Proven expertise in building
-            high-availability, low-latency microservices on AWS serving 50K+ users
-            with 99.9% uptime. Strong focus on backend scalability, system reliability,
-            and engineering leadership—mentoring teams, improving performance, and
-            driving automation across cloud environments.
+            Cloud &amp; backend engineer with 7+ years designing, building, and operating
+            cloud-native distributed systems in Python across AWS and Google Cloud.
+            Experience spans containerised microservices, Kubernetes/container platforms,
+            Infrastructure as Code (CloudFormation, EC2 Image Builder, AWS CDK), CI/CD
+            automation, and production security &mdash; with services serving 50K+ users at
+            99.9% uptime. Strong focus on system reliability, architecture ownership, and
+            engineering leadership, plus hands-on work with LLM/Agentic AI systems.
           </p>
         </div>
 
@@ -182,22 +187,26 @@
                 KPIT Technologies
                 <img class="company-logo" src="assets/img/companies/kpit.jpg" alt="KPIT logo" />
               </h4>
-              <h5>Technical Leader</h5>
+              <h5>Technical Leader &mdash; Cloud Platform &amp; Python Backend</h5>
               <h6>10/2025 - Present</h6>
               <p><em>Bengaluru, India</em></p>
               <p><em>KPIT is a global partner to the Automotive Industry and Mobility Ecosystem for making
                   software-defined vehicles a reality.</em></p>
               <ul>
-                <li>Designed <strong>real-time observability</strong> with <strong>Datadog Agent</strong> and
-                  <strong>custom RUM SDK scripts</strong>, creating production
-                  dashboards for <strong>frontend RUM metrics</strong>, <strong>backend service health</strong>, and
-                  <strong>Jenkins CI pipelines</strong>, reducing
-                  debugging time by <strong>~30%</strong>.
+                <li>Built a <strong>golden-AMI image factory</strong> with <strong>EC2 Image Builder</strong> and
+                  <strong>AWS CDK</strong> &mdash; versioned build/test components installing the full toolchain, cutting
+                  developer environment provisioning from a 40-minute install to seconds.
                 </li>
-                <li>Enabled <strong>proactive incident detection</strong> through <strong>automated alerts</strong> and
-                  <strong>stakeholder notifications</strong>,
-                  improving system reliability by <strong>~20%</strong> and reducing response time by
-                  <strong>~25%</strong>.
+                <li>Authored the <strong>CloudFormation</strong> Service Catalog product that provisions workbenches,
+                  resolving the AMI via an <strong>SSM Parameter Store</strong> contract so image builds and launch
+                  templates evolve independently &mdash; an <strong>immutable-infrastructure</strong> design.
+                </li>
+                <li>Designed <strong>CI/CD pipelines</strong> (GitLab, Docker, ECR) and <strong>real-time
+                    observability</strong> with <strong>Datadog</strong> dashboards and alerting, cutting deployment time
+                  by <strong>~30%</strong> and improving reliability for 24x7 services.
+                </li>
+                <li>Own <strong>architecture decisions</strong> and design reviews, and mentor <strong>5+
+                    engineers</strong> on Python, cloud, and distributed systems.
                 </li>
               </ul>
             </div>
@@ -315,19 +324,19 @@
               </p>
               <ul>
                 <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/SRCQ29ZFA7D7"
-                    target="_blank" rel="noopener noreferrer">Meta Back-End Developer by <b>Coursera</b></a></li>
-                <li>Business English Certificate Preliminary by <b>Cambridge University Press & Assessment</b></li>
+                    target="_blank" rel="noopener noreferrer">Meta Back-End Developer Professional Certificate by
+                    <b>Coursera</b></a> &mdash; Python, Django, REST APIs, Databases, Version Control.</li>
                 <li><a href="https://coursera.org/share/40e9724917dfaa964747946573612464" target="_blank"
-                    rel="noopener noreferrer">Networks and
-                    Deep Learning by <b>Coursera</b></a></li>
-                <li><a href="https://www.slideshare.net/sumanachary12/intro-to-data-science-115043842" target="_blank"
-                    rel="noopener noreferrer">Introduction to Data Science by <b>Microsoft Virtual Academy</b></a></li>
+                    rel="noopener noreferrer">Neural Networks and Deep Learning by <b>Coursera (deeplearning.ai)</b></a>
+                  &mdash; Grade 97.10%.</li>
                 <li><a href="https://www.freecodecamp.org/certification/sumanachary/scientific-computing-with-python-v7"
-                    target="_blank" rel="noopener noreferrer">Scientific Computing using Python by
-                    <b>Freecodecamp</b></a></li>
+                    target="_blank" rel="noopener noreferrer">Scientific Computing with Python by
+                    <b>freeCodeCamp</b></a></li>
                 <li><a href="https://www.hackerrank.com/certificates/1e636769ba9a" target="_blank"
-                    rel="noopener noreferrer">Problem Solving
-                    (Basic) Certificate by <b>HackerRank</b></a></li>
+                    rel="noopener noreferrer">Problem Solving (Basic) Certificate by <b>HackerRank</b></a></li>
+                <li>Java Level 1 by <b>Cambridge Certification Authority</b> &mdash; Issued Aug 2018.</li>
+                <li>Introduction to Data Science by <b>Microsoft Virtual Academy</b></li>
+                <li>Business English Certificate Preliminary by <b>Cambridge University Press &amp; Assessment</b></li>
               </ul>
             </div>
           </div>
@@ -445,23 +454,35 @@
         <div class="section-title">
           <h2>Projects</h2>
           <p>
-            This section showcases few projects that I worked on. The "Chatbot
-            Python" project involves the development of a chatbot using
-            Python. The "Covid19 Notification" project is about creating a
-            notification system for Covid19 updates. The "Dino Bot" project is
-            about the development of a bot for the popular Dino game. The
-            "Random Video Clip Generator", also referred to as "Trailer
-            Maker", is about generating random video clips, potentially for
-            creating trailers. Lastly, the "Killer Shark" project involving a
-            killer shark and a villager.
+            A selection of things I've built and shipped. <strong>QuickBytes</strong> is a
+            production full-stack platform running on Google Cloud Run with a FastAPI backend
+            and a Next.js frontend. <strong>Alphabot</strong> is an agent-based AI assistant
+            built on a Retrieval-Augmented Generation (RAG) pipeline with LangChain and
+            multi-model orchestration. The remaining projects are earlier Python builds
+            covering automation, notifications, and game bots.
           </p>
         </div>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
+            <a href="https://quickbytes.dev" target="_blank" rel="noopener noreferrer"
+              class="portfolio-wrap portfolio-wrap--live">
+              <img src="assets/img/portfolio/quickbytes.svg" class="img-fluid" alt="QuickBytes — Full-Stack Platform on Google Cloud Run" />
+              <h4 class="portfolio-title">QuickBytes &mdash; Full-Stack Platform (Cloud Run)</h4>
+            </a>
+          </div>
+
+          <div class="col-lg-4 col-md-4 portfolio-item filter-app">
+            <div class="portfolio-wrap portfolio-wrap--nolink">
+              <img src="assets/img/portfolio/alphabot.svg" class="img-fluid" alt="Alphabot — Agentic AI Assistant with RAG" />
+              <h4 class="portfolio-title">Alphabot &mdash; Agentic AI Assistant (RAG)</h4>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 portfolio-item filter-app">
             <a href="https://github.com/SumanAchary/Chatbot_python" target="_blank" rel="noopener noreferrer"
               class="portfolio-wrap">
-              <img src="assets/img/portfolio/chatbot.png" class="img-fluid" alt="Chatbot Python" />
+              <img src="assets/img/portfolio/chatbot.svg" class="img-fluid" alt="Chatbot Python" />
               <h4 class="portfolio-title">Chatbot Python</h4>
             </a>
           </div>
@@ -469,32 +490,24 @@
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
             <a href="https://github.com/SumanAchary/Covid19-notification" target="_blank" rel="noopener noreferrer"
               class="portfolio-wrap">
-              <img src="assets/img/portfolio/covid-notifier.png" class="img-fluid" alt="Covid19 Notification" />
+              <img src="assets/img/portfolio/covid-notifier.svg" class="img-fluid" alt="Covid19 Notification" />
               <h4 class="portfolio-title">Covid19 Notification</h4>
-            </a>
-          </div>
-
-          <div class="col-lg-4 col-md-4 portfolio-item filter-app">
-            <a href="https://github.com/SumanAchary/Dino-Bot" target="_blank" rel="noopener noreferrer"
-              class="portfolio-wrap">
-              <img src="assets/img/portfolio/dinobot.png" class="img-fluid" alt="Dino Bot" />
-              <h4 class="portfolio-title">Dino Bot</h4>
             </a>
           </div>
 
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
             <a href="https://github.com/SumanAchary/random_video_clip_generator" target="_blank"
               rel="noopener noreferrer" class="portfolio-wrap">
-              <img src="assets/img/portfolio/trailer_maker.png" class="img-fluid" alt="Trailer Maker" />
+              <img src="assets/img/portfolio/trailer_maker.svg" class="img-fluid" alt="Trailer Maker" />
               <h4 class="portfolio-title">Trailer Maker</h4>
             </a>
           </div>
 
           <div class="col-lg-4 col-md-4 portfolio-item filter-app">
-            <a href="https://github.com/SumanAchary/KillerShark_onlyScripts/tree/main/SCRIPT" target="_blank"
-              rel="noopener noreferrer" class="portfolio-wrap">
-              <img src="assets/img/portfolio/killer-shark.png" class="img-fluid" alt="Killer Shark" />
-              <h4 class="portfolio-title">Killer Shark</h4>
+            <a href="https://github.com/SumanAchary/Dino-Bot" target="_blank" rel="noopener noreferrer"
+              class="portfolio-wrap">
+              <img src="assets/img/portfolio/dinobot.svg" class="img-fluid" alt="Dino Bot" />
+              <h4 class="portfolio-title">Dino Bot</h4>
             </a>
           </div>
         </div>
@@ -521,6 +534,29 @@
 
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="testimonial-item" data-aos="fade-up">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Suman has been a great coworker for the past couple of years. We've teamed up on software
+                  projects where he's really stood out. As a software developer, his backend skills and API
+                  design are solid &mdash; his code is efficient and reliable, which keeps our projects running
+                  smoothly. When we run into problems, he is quick to troubleshoot and find solutions, saving us
+                  time and headaches. He collaborates well, shares his knowledge, and always brings a positive
+                  attitude. Detail-oriented and professional, he takes pride in his work. I'd definitely
+                  recommend Suman for any software development role &mdash; talented, down-to-earth, and a great
+                  asset to any team.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img
+                  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%233498db'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='Roboto,Arial,sans-serif' font-size='44' font-weight='700' fill='white'>GP</text></svg>"
+                  class="testimonial-img" alt="Guruprasad Padukone" />
+                <h3>Guruprasad Padukone</h3>
+                <h4>Software Engineer &mdash; Colleague</h4>
+              </div>
+            </div>
+            <!-- End testimonial item -->
+
             <div class="swiper-slide">
               <div class="testimonial-item" data-aos="fade-up">
                 <p>
@@ -619,6 +655,48 @@
       </div>
     </section>
     <!-- End Testimonials Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact section-bg">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>
+            Open to backend, cloud, and platform engineering roles, and to interesting
+            conversations about distributed systems. The fastest way to reach me is email
+            or LinkedIn.
+          </p>
+        </div>
+
+        <div class="contact-cta" data-aos="fade-up">
+          <a href="mailto:gsumanachary@gmail.com" class="contact-card">
+            <i class="bx bx-envelope"></i>
+            <span class="contact-card-label">Email</span>
+            <span class="contact-card-value">gsumanachary@gmail.com</span>
+          </a>
+          <a href="https://www.linkedin.com/in/gsumanachary/" target="_blank" rel="noopener noreferrer"
+            class="contact-card">
+            <i class="bx bxl-linkedin"></i>
+            <span class="contact-card-label">LinkedIn</span>
+            <span class="contact-card-value">in/gsumanachary</span>
+          </a>
+          <a href="https://github.com/SumanAchary" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <i class="bx bxl-github"></i>
+            <span class="contact-card-label">GitHub</span>
+            <span class="contact-card-value">SumanAchary</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- End Contact Section -->
+
+    <!-- ======= Site Footer ======= -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; <span id="footer-year">2026</span> Suman Achary. Built with care.</p>
+      </div>
+    </footer>
+    <!-- End Site Footer -->
   </main>
   <!-- End #main -->
 
@@ -656,11 +734,23 @@
   <!-- Matrix Rain Effect -->
   <script src="assets/js/matrix-rain.js"></script>
 
+  <!-- Floating Sparks / Fireflies -->
+  <script src="assets/js/sparks.js"></script>
+
+  <!-- Sidebar Ambient Smoke -->
+  <script src="assets/js/sidebar-smoke.js"></script>
+
   <script>
     // Add the "loaded" class to the body element when the page is fully loaded
     window.addEventListener("load", function () {
       document.body.classList.add("loaded");
     });
+
+    // Keep the footer year current
+    (function () {
+      var y = document.getElementById("footer-year");
+      if (y) y.textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 

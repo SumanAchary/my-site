@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hero = document.querySelector('#hero');
     const heroContainer = document.querySelector('#hero .hero-container');
     const sections = document.querySelectorAll('section');
-    const header = document.querySelector('#header');
+    const scrollDown = document.querySelector('.scroll-down');
 
     // 1. Initial Styles for Reveal
     sections.forEach(section => {
@@ -65,19 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
             progressBar.style.width = `${scrollProgress}%`;
         }
 
-        // Hero Parallax
+        // Hero fade on scroll (opacity only — NO transform, because a
+        // transform on this container becomes a containing block and
+        // disables the .hero-content backdrop-filter glass blur).
         if (heroContainer && scrolled < window.innerHeight) {
-            heroContainer.style.transform = `translateY(${scrolled * 0.4}px)`;
             heroContainer.style.opacity = `${1 - scrolled / (window.innerHeight * 0.8)}`;
         }
 
-        // Sidebar Glass Pulse
-        if (header) {
-            const opacity = Math.min(0.85 + (scrolled / 1000), 0.98);
-            const blur = Math.min(15 + (scrolled / 100), 25);
-            header.style.background = `rgba(12, 36, 97, ${opacity})`;
-            header.style.backdropFilter = `blur(${blur}px)`;
+        // Hide the scroll-down hint once the user starts scrolling.
+        if (scrollDown) {
+            scrollDown.classList.toggle('hidden', scrolled > 60);
         }
+
+        // NOTE: The old "Sidebar Glass Pulse" was removed — it forced the
+        // header back to a blue glass look via inline styles on scroll,
+        // overriding the flat Material sidebar CSS.
     });
 
     // 4. Subtle Smooth Scrolling Momentum logic (Simplified)

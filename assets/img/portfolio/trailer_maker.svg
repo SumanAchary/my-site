@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Trailer Maker">
+  <defs>
+    <linearGradient id="tmBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1622"/>
+      <stop offset="1" stop-color="#12263b"/>
+    </linearGradient>
+    <linearGradient id="tmAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3498db"/>
+      <stop offset="1" stop-color="#5fd0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" rx="16" fill="url(#tmBg)"/>
+  <rect x="1" y="1" width="598" height="398" rx="15" fill="none" stroke="#3498db" stroke-opacity="0.25" stroke-width="2"/>
+  <rect x="48" y="150" width="64" height="6" rx="3" fill="url(#tmAccent)"/>
+  <text x="48" y="205" font-family="'Poppins','Segoe UI',Arial,sans-serif" font-size="52" font-weight="700" fill="#ffffff">Trailer <tspan fill="#3498db">Maker</tspan></text>
+  <text x="50" y="248" font-family="'Open Sans',Arial,sans-serif" font-size="22" font-weight="600" fill="#9fb3c8">Random Video Clip Generator</text>
+  <text x="50" y="284" font-family="'Open Sans',Arial,sans-serif" font-size="17" fill="#6f8296">Python &#183; MoviePy &#183; Automation</text>
+  <g>
+    <rect x="48" y="320" width="135" height="34" rx="17" fill="#3498db"/>
+    <text x="66" y="342" font-family="'Open Sans',Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1622">VIDEO TOOL</text>
+  </g>
+  <!-- play button motif -->
+  <g fill="#3498db" fill-opacity="0.12">
+    <circle cx="508" cy="108" r="42"/>
+    <path d="M495 88 l0 40 l32 -20 z" fill="#0b1622" fill-opacity="0.5"/>
+  </g>
+</svg>

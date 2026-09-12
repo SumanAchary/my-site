@@ -46,16 +46,33 @@
    */
   let navbarlinks = select('#navbar .scrollto', true)
   const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
-      } else {
-        navbarlink.classList.remove('active')
+    // Offset a bit past the top of a section before it counts as "current".
+    let position = window.scrollY + 120
+
+    // In-page links only (those whose hash resolves to a section).
+    const inPageLinks = navbarlinks.filter(l => l.hash && select(l.hash))
+
+    // Default to the first section (Home) so the top of the page is covered.
+    let current = inPageLinks[0] || null
+
+    inPageLinks.forEach(navbarlink => {
+      const section = select(navbarlink.hash)
+      // Last section whose top we've scrolled past becomes current.
+      if (position >= section.offsetTop) {
+        current = navbarlink
       }
+    })
+
+    // If we're at the very bottom, highlight the last section.
+    const atBottom = window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 2
+    if (atBottom && inPageLinks.length) {
+      current = inPageLinks[inPageLinks.length - 1]
+    }
+
+    // Apply active only to that one link; clear all others.
+    navbarlinks.forEach(navbarlink => {
+      navbarlink.classList.toggle('active', navbarlink === current)
     })
   }
   window.addEventListener('load', navbarlinksActive)

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Alphabot - Agentic AI Assistant with RAG">
+  <defs>
+    <linearGradient id="abBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1622"/>
+      <stop offset="1" stop-color="#131b2e"/>
+    </linearGradient>
+    <linearGradient id="abAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3498db"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" rx="16" fill="url(#abBg)"/>
+  <rect x="1" y="1" width="598" height="398" rx="15" fill="none" stroke="#7c5cff" stroke-opacity="0.25" stroke-width="2"/>
+  <!-- accent bar -->
+  <rect x="48" y="150" width="64" height="6" rx="3" fill="url(#abAccent)"/>
+  <!-- wordmark -->
+  <text x="48" y="205" font-family="'Poppins','Segoe UI',Arial,sans-serif" font-size="58" font-weight="700" fill="#ffffff">Alpha<tspan fill="#7c5cff">bot</tspan></text>
+  <text x="50" y="248" font-family="'Open Sans',Arial,sans-serif" font-size="22" font-weight="600" fill="#9fb3c8">Agentic AI Assistant with RAG</text>
+  <text x="50" y="284" font-family="'Open Sans',Arial,sans-serif" font-size="17" fill="#6f8296">LangChain &#183; ChromaDB &#183; Gemini &#183; OpenAI &#183; Llama</text>
+  <!-- tag pill -->
+  <g>
+    <rect x="48" y="320" width="185" height="34" rx="17" fill="#7c5cff"/>
+    <text x="66" y="342" font-family="'Open Sans',Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1622">MULTI-MODEL RAG</text>
+  </g>
+  <!-- decorative neural/agent motif -->
+  <g stroke="#7c5cff" stroke-opacity="0.18" stroke-width="3" fill="none">
+    <circle cx="500" cy="90" r="16"/>
+    <circle cx="452" cy="150" r="12"/>
+    <circle cx="548" cy="150" r="12"/>
+    <line x1="500" y1="106" x2="452" y2="138"/>
+    <line x1="500" y1="106" x2="548" y2="138"/>
+  </g>
+</svg>

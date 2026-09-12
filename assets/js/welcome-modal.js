@@ -1,65 +1,72 @@
+/**
+ * Background Music + Mute Button
+ * On by default at 60% volume. Browsers block autoplay-with-sound until the
+ * user interacts with the page, so if the initial play() is blocked we retry
+ * on the first user gesture (click / key / scroll / touch / pointer / move).
+ * The button reflects the user's intent (on unless they toggle it off).
+ */
 document.addEventListener('DOMContentLoaded', () => {
-    const vibeFeature = document.getElementById('vibe-control');
-    const vibeToggle = document.getElementById('vibe-toggle');
-    const vibeClose = document.getElementById('vibe-close');
-    const musicToggle = document.getElementById('music-vibe-toggle');
-    const cursorToggle = document.getElementById('cursor-vibe-toggle');
+    const bgMusic = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-btn');
 
-    if (!vibeFeature) return;
+    if (!bgMusic || !musicBtn) return;
 
-    // Show feature automatically after a slight delay (2 seconds)
-    setTimeout(() => {
-        vibeFeature.classList.add('active');
-    }, 2000);
+    // Set volume once metadata/element is ready.
+    bgMusic.volume = 0.6;
 
-    // Toggle button logic
-    if (vibeToggle) {
-        vibeToggle.addEventListener('click', () => {
-            vibeFeature.classList.toggle('active');
-        });
-    }
+    // User intent: ON by default. (Actual audio may wait for a gesture.)
+    let wantOn = true;
 
-    // Close button logic
-    if (vibeClose) {
-        vibeClose.addEventListener('click', () => {
-            vibeFeature.classList.remove('active');
-        });
-    }
+    const GESTURES = ['pointerdown', 'click', 'keydown', 'scroll', 'touchstart', 'mousemove'];
 
-    // Music Toggle Logic
-    if (musicToggle) {
-        musicToggle.addEventListener('change', (e) => {
-            const bgMusic = document.getElementById('bg-music');
-            if (!bgMusic) return;
+    const reflectState = () => {
+        const muted = !wantOn;
+        musicBtn.classList.toggle('is-muted', muted);
+        musicBtn.setAttribute('aria-pressed', String(muted));
+        musicBtn.setAttribute('aria-label', muted ? 'Unmute background music' : 'Mute background music');
+        const label = musicBtn.querySelector('.music-fab-label');
+        if (label) label.textContent = muted ? 'Music off' : 'Music on';
+    };
 
-            if (e.target.checked) {
-                bgMusic.play();
-            } else {
-                bgMusic.pause();
-            }
-        });
-    }
+    const tryPlay = () => {
+        if (!wantOn) return Promise.resolve();
+        bgMusic.volume = 0.6;
+        const p = bgMusic.play();
+        return p && typeof p.then === 'function' ? p : Promise.resolve();
+    };
 
-    // Cursor Toggle Logic
-    if (cursorToggle) {
-        cursorToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                if (window.enableCursorEffect) window.enableCursorEffect();
-            } else {
-                if (window.disableCursorEffect) window.disableCursorEffect();
-            }
-        });
-    }
+    // Retry playback on the first user gesture, then stop listening.
+    const onGesture = () => {
+        if (!wantOn) return removeGestureListeners();
+        tryPlay().then(removeGestureListeners).catch(() => {});
+    };
+    const removeGestureListeners = () => {
+        GESTURES.forEach((evt) => window.removeEventListener(evt, onGesture));
+    };
+    const addGestureListeners = () => {
+        GESTURES.forEach((evt) =>
+            window.addEventListener(evt, onGesture, { passive: true })
+        );
+    };
 
-    // Matrix Mode Toggle Logic
-    const matrixToggle = document.getElementById('matrix-vibe-toggle');
-    if (matrixToggle) {
-        matrixToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.body.classList.add('matrix-mode');
-            } else {
-                document.body.classList.remove('matrix-mode');
-            }
-        });
-    }
+    // Attempt autoplay immediately; if blocked, arm the gesture fallback.
+    tryPlay().catch(addGestureListeners);
+    // Arm anyway in case the promise resolved without actually starting.
+    addGestureListeners();
+
+    // Manual toggle.
+    musicBtn.addEventListener('click', () => {
+        wantOn = !wantOn;
+        if (wantOn) {
+            tryPlay().catch(() => {});
+        } else {
+            bgMusic.pause();
+        }
+        reflectState();
+    });
+
+    // Slide the button in shortly after load.
+    setTimeout(() => musicBtn.classList.add('visible'), 900);
+
+    reflectState();
 });
