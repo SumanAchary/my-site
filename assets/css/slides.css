@@ -1,0 +1,327 @@
+/*--------------------------------------------------------------
+# Slideshow / Deck Layout  (slides.html only)
+# Turns the sections into full-screen slides navigated with arrows,
+# keyboard, and swipe. Layered on top of style.css — the original
+# scrolling index.html is untouched.
+--------------------------------------------------------------*/
+
+/* Lock the page: the deck fills the viewport, no page scroll. */
+html.deck,
+html.deck body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* The area to the right of the fixed sidebar that holds the slides. */
+:root {
+  --deck-sidebar: 300px;
+}
+
+/* ---- Slide stage --------------------------------------------------------
+   #hero and every direct <section> of #main become stacked, full-screen
+   slides. Only the active one is visible; the rest sit off to the sides. */
+/* Horizontal filmstrip: every slide is a full-screen panel sitting side by
+   side. They all stay in the DOM and slide left/right together (controlled by
+   the --deck-x variable set per slide from JS), giving a side-scroll deck. */
+.deck #hero,
+.deck #main > section {
+  position: fixed;
+  top: 0;
+  left: var(--deck-sidebar);
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 100vh;
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 5;
+  /* Each slide is shifted horizontally by its own offset. */
+  transform: translateX(var(--deck-x, 0));
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Slides allow internal scrolling without top clipping */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  will-change: transform;
+  /* Opaque so sliding panels fully cover each other (no see-through overlap
+     with the neighbouring slide during the transition). */
+  background-color: var(--bg-0);
+  background-image:
+    linear-gradient(rgba(34, 224, 224, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 224, 224, 0.045) 1px, transparent 1px),
+    radial-gradient(60vw 60vw at 0% 0%, rgba(34, 224, 224, 0.10), transparent 55%),
+    radial-gradient(55vw 55vw at 100% 15%, rgba(212, 175, 55, 0.10), transparent 55%),
+    linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+  background-size: 44px 44px, 44px 44px, cover, cover, cover;
+}
+
+/* Hero keeps its own photo background — centered vertically */
+.deck #hero {
+  background-color: var(--bg-0);
+  justify-content: center;
+}
+
+/* #main itself is just a passthrough container now. */
+.deck #main {
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+
+/* The active slide sits on top so its internal scroll/links win. */
+.deck .slide-active {
+  z-index: 6;
+}
+
+/* Off-screen slides can't be interacted with. */
+.deck #hero:not(.slide-active),
+.deck #main > section:not(.slide-active) {
+  pointer-events: none;
+}
+
+/* Give slide content breathing room and a max width so it reads well. */
+.deck #main > section > .container {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+/* Hero keeps its full-bleed background but is a slide too. */
+.deck #hero {
+  padding: 0;
+}
+
+/* The scroll-down indicator becomes a "next" nudge on the hero slide. */
+.deck .scroll-down .scroll-down-text::after {
+  content: "";
+}
+
+/* Hide the original vertical scroll progress bar in deck mode. */
+.deck #scroll-progress {
+  display: none;
+}
+
+/* Footer isn't a slide — tuck it at the bottom of the contact slide. */
+.deck .site-footer {
+  position: fixed;
+  bottom: 10px;
+  left: var(--deck-sidebar);
+  right: 0;
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ---- Navigation arrows -------------------------------------------------- */
+.deck-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  background: rgba(11, 16, 36, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--accent-2);
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.deck-arrow i {
+  line-height: 1;
+}
+
+.deck-arrow--prev {
+  left: calc(var(--deck-sidebar) + 22px);
+}
+
+.deck-arrow--next {
+  right: 22px;
+}
+
+.deck-arrow:hover {
+  background: rgba(34, 224, 224, 0.16);
+  border-color: var(--accent-2);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.deck-arrow:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 3px;
+}
+
+/* Disabled at the ends of the deck. */
+.deck-arrow[disabled] {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ---- Progress dots ------------------------------------------------------ */
+.deck-dots {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  /* shift right so it centres in the slide area, not under the sidebar */
+  margin-left: calc(var(--deck-sidebar) / 2);
+  display: flex;
+  gap: 12px;
+  z-index: 50;
+}
+
+.deck-dots button {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.deck-dots button:hover {
+  border-color: var(--accent-2);
+}
+
+.deck-dots button.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.25);
+  box-shadow: 0 0 10px rgba(34, 224, 224, 0.7);
+}
+
+.deck-dots button:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+/* ---- Slide counter ------------------------------------------------------ */
+.deck-counter {
+  position: fixed;
+  top: 22px;
+  right: 24px;
+  z-index: 50;
+  font-family: var(--font-tech);
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: rgba(11, 16, 36, 0.5);
+  border: 1px solid var(--border-soft);
+  padding: 5px 12px;
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.deck-counter #deck-current {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+/* ---- First-visit hint --------------------------------------------------- */
+.deck-hint {
+  position: fixed;
+  right: 92px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--accent-2);
+  background: rgba(11, 16, 36, 0.6);
+  border: 1px solid var(--border-soft);
+  padding: 8px 14px;
+  border-radius: 24px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  animation: deckHintFloat 1.8s ease-in-out infinite;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.deck-hint i {
+  font-size: 18px;
+}
+
+.deck-hint.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes deckHintFloat {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50%      { transform: translateY(-50%) translateX(-6px); }
+}
+
+/* ---- Mobile ------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  :root {
+    --deck-sidebar: 0px;
+  }
+
+  .deck #hero,
+  .deck #main > section {
+    left: 0;
+  }
+
+  .deck-arrow--prev {
+    left: 12px;
+  }
+
+  .deck-arrow--next {
+    right: 12px;
+  }
+
+  .deck-arrow {
+    width: 46px;
+    height: 46px;
+    font-size: 24px;
+  }
+
+  .deck-dots {
+    margin-left: 0;
+    bottom: 18px;
+  }
+
+  .deck .site-footer {
+    left: 0;
+  }
+
+  /* The hint is noisy on small screens — hide it. */
+  .deck-hint {
+    display: none;
+  }
+
+  .deck #main > section > .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  .deck #hero,
+  .deck #main > section {
+    transition: none;
+  }
+  .deck-hint {
+    animation: none;
+  }
+}

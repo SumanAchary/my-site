@@ -33,6 +33,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet" />
+
+  <!-- Slideshow / deck layout -->
+  <link href="assets/css/slides.css?v=4" rel="stylesheet" />
 </head>
 
 <body>
@@ -110,7 +113,7 @@
           </li>
 
           <li>
-            <a href="#testimonials" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Testimonials</span></a>
+            <a href="#testimonials" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Recommendations</span></a>
           </li>
 
           <li>
@@ -141,7 +144,7 @@
     <div class="hero-container">
       <div class="hero-content">
         <h1>Suman Achary</h1>
-        <p>I'm a <span class="highlight">Software Engineer</span> building <br>
+        <p>I'm a <span class="highlight">Technical Lead</span> building <br>
           <span class="typed"
             data-typed-items="Distributed Systems, High-Availability Systems, Low Latency Backend Services"></span>
         </p>
@@ -519,16 +522,14 @@
     <section id="testimonials" class="testimonials section-bg">
       <div class="container">
         <div class="section-title">
-          <h2>Testimonials</h2>
+          <h2>Recommendations from Peers &amp; Fellow Engineers</h2>
           <p>
-            Thank you to all the industry experts and colleagues who have
-            shared their invaluable recommendations and testimonials. Your
-            kind words and support inspire me to strive for excellence and
-            continuously improve. It's an honor to have had the opportunity to
-            work alongside such esteemed professionals. Your feedback is not
-            only a testament to my work but also a source of motivation for
-            the journey ahead. I am truly grateful for your trust and
-            encouragement.
+            Thank you to the peers, mentors, and fellow engineers I've had the
+            privilege of working alongside. Your kind words and support inspire
+            me to strive for excellence and continuously improve. These
+            recommendations mean a great deal to me &mdash; both a reflection of
+            the work we've shipped together and a source of motivation for the
+            journey ahead. I'm truly grateful for your trust and encouragement.
           </p>
         </div>
 
@@ -700,6 +701,25 @@
   </main>
   <!-- End #main -->
 
+  <!-- ======= Deck Navigation Controls ======= -->
+  <button id="deck-prev" class="deck-arrow deck-arrow--prev" type="button" aria-label="Previous slide">
+    <i class="bx bx-chevron-left"></i>
+  </button>
+  <button id="deck-next" class="deck-arrow deck-arrow--next" type="button" aria-label="Next slide">
+    <i class="bx bx-chevron-right"></i>
+  </button>
+
+  <nav id="deck-dots" class="deck-dots" aria-label="Slide navigation"></nav>
+
+  <div class="deck-counter">
+    <span id="deck-current">1</span> / <span id="deck-total">6</span>
+  </div>
+
+  <div id="deck-hint" class="deck-hint">
+    <i class="bx bx-right-arrow-alt"></i>
+    <span>Use the arrows (or &larr; &rarr; keys) to explore</span>
+  </div>
+
   <!-- Footer removed to avoid overlap with sidebar controls -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -718,6 +738,9 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Deck / Slideshow navigation -->
+  <script src="assets/js/slides.js?v=3"></script>
 
   <!-- Fluid Scroll Effects -->
   <script src="assets/js/fluid-scroll.js"></script>

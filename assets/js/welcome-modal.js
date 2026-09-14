@@ -1,8 +1,10 @@
 /**
  * Background Music + Mute Button
- * On by default at 60% volume. Browsers block autoplay-with-sound until the
- * user interacts with the page, so if the initial play() is blocked we retry
- * on the first user gesture (click / key / scroll / touch / pointer / move).
+ *
+ * On by default. Browsers block autoplay-*with-sound* until the user
+ * interacts with the page, so if the initial play() is blocked we retry on
+ * the first user gesture (scroll / click / key / touch / pointer / move).
+ * When playback starts, the volume fades in smoothly instead of jumping.
  * The button reflects the user's intent (on unless they toggle it off).
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,13 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!bgMusic || !musicBtn) return;
 
-    // Set volume once metadata/element is ready.
-    bgMusic.volume = 0.6;
+    const TARGET_VOLUME = 0.6;   // final volume when on
+    const FADE_MS = 1500;        // fade-in / fade-out duration
 
     // User intent: ON by default. (Actual audio may wait for a gesture.)
     let wantOn = true;
+    let fadeTimer = null;
 
-    const GESTURES = ['pointerdown', 'click', 'keydown', 'scroll', 'touchstart', 'mousemove'];
+    // Start silent so the very first frames of audio don't blast at full volume.
+    bgMusic.volume = 0;
+
+    const GESTURES = ['pointerdown', 'click', 'keydown', 'scroll', 'touchstart', 'mousemove', 'wheel'];
 
     const reflectState = () => {
         const muted = !wantOn;
@@ -28,11 +34,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (label) label.textContent = muted ? 'Music off' : 'Music on';
     };
 
+    // Smoothly ramp bgMusic.volume from its current value to `to` over FADE_MS.
+    const fadeTo = (to, onDone) => {
+        if (fadeTimer) {
+            clearInterval(fadeTimer);
+            fadeTimer = null;
+        }
+        const from = bgMusic.volume;
+        const start = performance.now();
+        fadeTimer = setInterval(() => {
+            const t = Math.min((performance.now() - start) / FADE_MS, 1);
+            bgMusic.volume = from + (to - from) * t;
+            if (t >= 1) {
+                clearInterval(fadeTimer);
+                fadeTimer = null;
+                if (typeof onDone === 'function') onDone();
+            }
+        }, 30);
+    };
+
+    // Attempt to start playback and fade the volume in. Returns the play promise.
     const tryPlay = () => {
         if (!wantOn) return Promise.resolve();
-        bgMusic.volume = 0.6;
         const p = bgMusic.play();
-        return p && typeof p.then === 'function' ? p : Promise.resolve();
+        const started = p && typeof p.then === 'function' ? p : Promise.resolve();
+        return started.then(() => fadeTo(TARGET_VOLUME));
     };
 
     // Retry playback on the first user gesture, then stop listening.
@@ -49,18 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     };
 
-    // Attempt autoplay immediately; if blocked, arm the gesture fallback.
+    // No intro popup — try to autoplay, and if the browser blocks it, start
+    // the music on the visitor's first natural interaction (scroll/click/etc).
     tryPlay().catch(addGestureListeners);
-    // Arm anyway in case the promise resolved without actually starting.
     addGestureListeners();
 
-    // Manual toggle.
+    // Manual toggle — fade in when turning on, fade out then pause when off.
     musicBtn.addEventListener('click', () => {
         wantOn = !wantOn;
         if (wantOn) {
             tryPlay().catch(() => {});
         } else {
-            bgMusic.pause();
+            fadeTo(0, () => bgMusic.pause());
         }
         reflectState();
     });

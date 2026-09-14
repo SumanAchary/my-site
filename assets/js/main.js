@@ -45,6 +45,13 @@
    * Navbar links active state on scroll
    */
   let navbarlinks = select('#navbar .scrollto', true)
+
+  // True document-relative top of an element. Using offsetTop is unreliable
+  // here because sections live inside #main (position: relative), so their
+  // offsetTop is measured against #main, not the page — which sent every
+  // in-page link back near the top (Home). getBoundingClientRect fixes that.
+  const docTop = (el) => el.getBoundingClientRect().top + window.scrollY
+
   const navbarlinksActive = () => {
     // Offset a bit past the top of a section before it counts as "current".
     let position = window.scrollY + 120
@@ -58,7 +65,7 @@
     inPageLinks.forEach(navbarlink => {
       const section = select(navbarlink.hash)
       // Last section whose top we've scrolled past becomes current.
-      if (position >= section.offsetTop) {
+      if (position >= docTop(section)) {
         current = navbarlink
       }
     })
@@ -82,7 +89,7 @@
    * Scrolls to an element with header offset
    */
   const scrollto = (el) => {
-    let elementPos = select(el).offsetTop
+    let elementPos = docTop(select(el))
     window.scrollTo({
       top: elementPos,
       behavior: 'smooth'
