@@ -122,33 +122,12 @@
   })
 
   /**
-   * Scrool with ofset on links with a class name .scrollto
+   * In-page nav: rely on native anchor scrolling + CSS scroll-behavior:smooth
+   * and scroll-padding-top (set in style.css) so every link — including the
+   * ones near the bottom of the page — jumps correctly under the fixed topbar.
+   * (The old custom window.scrollTo handler could fail for bottom sections
+   * that can't be scrolled fully to the top, so it's removed.)
    */
-  on('click', '.scrollto', function (e) {
-    if (select(this.hash)) {
-      e.preventDefault()
-
-      let body = select('body')
-      if (body.classList.contains('mobile-nav-active')) {
-        body.classList.remove('mobile-nav-active')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-      scrollto(this.hash)
-    }
-  }, true)
-
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
-    }
-  });
 
   /**
    * Hero type effect

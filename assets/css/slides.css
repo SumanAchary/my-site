@@ -56,9 +56,15 @@ html.deck body {
   background-size: 44px 44px, 44px 44px, cover, cover, cover;
 }
 
-/* Hero keeps its own photo background — centered vertically */
+/* Hero keeps its own photo background — centered vertically.
+   Transparent background so the themed matrix-rain canvas (behind the deck)
+   shows through on the hero slide. A subtle dark wash keeps text readable. */
 .deck #hero {
-  background-color: var(--bg-0);
+  background-color: transparent;
+  background-image:
+    radial-gradient(60vw 60vw at 20% 10%, rgba(56, 189, 248, 0.10), transparent 55%),
+    radial-gradient(55vw 55vw at 100% 20%, rgba(167, 139, 250, 0.10), transparent 55%),
+    linear-gradient(180deg, rgba(13, 21, 38, 0.55) 0%, rgba(17, 28, 51, 0.75) 100%);
   justify-content: center;
 }
 
@@ -78,6 +84,32 @@ html.deck body {
 .deck #hero:not(.slide-active),
 .deck #main > section:not(.slide-active) {
   pointer-events: none;
+}
+
+/* ---- Scrollbar fix during transitions -----------------------------------
+   Each slide is transformed with translateX during navigation. A native
+   scrollbar painted on the slide's right edge would visibly slide sideways
+   with the panel, which looks broken. We hide the visible scrollbar on the
+   slides (scrolling still works via wheel / touch / keyboard / trackpad),
+   and only the active slide is allowed to scroll at all. */
+.deck #hero,
+.deck #main > section {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* old Edge/IE */
+}
+
+.deck #hero::-webkit-scrollbar,
+.deck #main > section::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;                  /* Chrome / Safari / Edge */
+}
+
+/* Only the active slide scrolls; the rest are frozen so no stray scroll
+   position or scrollbar animates during the slide transition. */
+.deck #hero:not(.slide-active),
+.deck #main > section:not(.slide-active) {
+  overflow: hidden;
 }
 
 /* Give slide content breathing room and a max width so it reads well. */

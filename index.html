@@ -34,20 +34,13 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet" />
 
-  <!-- Slideshow / deck layout -->
-  <link href="assets/css/slides.css?v=4" rel="stylesheet" />
+  <!-- Hero hook + impact-first hero styles -->
+  <link href="assets/css/hero-hook.css?v=10" rel="stylesheet" />
 </head>
 
 <body>
   <canvas id="matrix-canvas"></canvas>
-  <canvas id="sparks-canvas"></canvas>
   <div id="scroll-progress"></div>
-  <!-- ======= Music Mute Button (slides in from left) ======= -->
-  <button id="music-btn" class="music-fab" type="button" aria-label="Mute background music" aria-pressed="false">
-    <i class="bi bi-volume-up-fill icon-on"></i>
-    <i class="bi bi-volume-mute-fill icon-off"></i>
-    <span class="music-fab-label">Music on</span>
-  </button>
 
   <!-- DORMANT: Vibe Control card (Magic Skills + Matrix Mode) removed from UI, kept for future re-enable.
   <div id="vibe-control" class="vibe-feature card-only">
@@ -77,83 +70,204 @@
   -->
 
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+  <!-- ======= Top Nav Bar ======= -->
+  <header id="topbar">
+    <div class="topbar-inner">
+      <a href="#hero" class="brand">
+        <img src="assets/img/profile-img.jpg" alt="Suman Achary" class="brand-img" />
+        <span class="brand-name">Suman Achary</span>
+      </a>
 
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <canvas id="sidebar-smoke"></canvas>
-    <div class="d-flex flex-column">
-      <div class="profile">
-        <img src="assets/img/profile-img.jpg" alt="Suman Achary" class="img-fluid rounded-circle" />
-        <h1 class="text-light"><a href="index.html">Suman Achary</a></h1>
-        <div class="social-links mt-3 text-center">
-          <a href="https://www.linkedin.com/in/gsumanachary/" target="_blank" rel="noopener noreferrer" class="linkedin"
-            data-tooltip="LinkedIn" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://leetcode.com/G_Suman_Achary/" target="_blank" rel="noopener noreferrer" class="leetcode"
-            data-tooltip="LeetCode" aria-label="LeetCode"><i class="bx bx-code-curly"></i></a>
-          <a href="https://github.com/SumanAchary" target="_blank" rel="noopener noreferrer" class="githun"
-            data-tooltip="GitHub" aria-label="GitHub"><i class="bx bxl-github"></i></a>
-        </div>
-      </div>
-
-      <nav id="navbar" class="nav-menu navbar">
-        <ul>
-          <li>
-            <a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a>
-          </li>
-          <li>
-            <a href="#timeline" class="nav-link scrollto"><i class="bx bx-time-five"></i> <span>Experience</span></a>
-          </li>
-          <li>
-            <a href="#skills" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Skills</span></a>
-          </li>
-          <li>
-            <a href="#portfolio" class="nav-link scrollto"><i class="bx bx-dumbbell"></i> <span>Projects</span></a>
-          </li>
-
-          <li>
-            <a href="#testimonials" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Recommendations</span></a>
-          </li>
-
-          <li>
-            <a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a>
-          </li>
-
-          <li>
-            <a href="https://drive.google.com/file/d/1q9tvVYunZ0dSwkqFknwrFSU6dnOEdEOa/view?usp=drive_link"
-              class="nav-link" target="_blank" rel="noopener noreferrer"><i class="bx bx-download"></i> <span>Download
-                Resume</span></a>
-          </li>
-        </ul>
-      </nav>
-      <!-- .nav-menu -->
-
-      <div class="sidebar-footer">
-        <audio id="bg-music" loop>
-          <source src="assets/tune/moodmode.mp3" type="audio/mpeg">
-        </audio>
+      <div class="topbar-socials">
+        <a href="https://github.com/SumanAchary" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="bx bxl-github"></i><span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/gsumanachary/" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="bx bxl-linkedin"></i><span>LinkedIn</span>
+        </a>
+        <a href="https://leetcode.com/G_Suman_Achary/" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="bx bx-code-curly"></i><span>LeetCode</span>
+        </a>
       </div>
     </div>
   </header>
-  <!-- End Header -->
+  <!-- End Top Bar -->
 
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+  <!-- ======= Hero Section (summary dashboard) ======= -->
+  <section id="hero">
     <div class="hero-container">
-      <div class="hero-content">
-        <h1>Suman Achary</h1>
-        <p>I'm a <span class="highlight">Technical Lead</span> building <br>
-          <span class="typed"
-            data-typed-items="Distributed Systems, High-Availability Systems, Low Latency Backend Services"></span>
-        </p>
+      <div class="dash">
+
+        <!-- Dashboard header -->
+        <div class="dash-header">
+          <div class="dash-id">
+            <p class="hero-eyebrow"><span class="live-dot"></span> Technical Lead &middot; Cloud &amp; Distributed Systems &middot; 7+ years</p>
+            <h1>Suman Achary</h1>
+            <p class="hero-tagline">I build <span class="highlight">distributed systems</span> that stay up when it matters &mdash;
+              <span class="typed"
+                data-typed-items="serving 50K+ users, at 99.9% uptime, with low-latency backends, powered by AWS &amp; AI"></span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Dashboard grid -->
+        <div class="dash-grid">
+
+          <!-- Stat cards -->
+          <div class="dash-card stat-card" data-aos="fade-up">
+            <span class="stat-icon"><i class="bx bx-group"></i></span>
+            <span class="metric-num" data-target="50" data-suffix="K+">0</span>
+            <span class="metric-label">Users served</span>
+            <span class="stat-trend up"><i class="bx bx-trending-up"></i> scaled</span>
+          </div>
+
+          <div class="dash-card stat-card" data-aos="fade-up" data-aos-delay="60">
+            <span class="stat-icon"><i class="bx bx-pulse"></i></span>
+            <span class="metric-num" data-target="99.9" data-suffix="%" data-decimals="1">0</span>
+            <span class="metric-label">Uptime</span>
+            <span class="stat-trend up"><i class="bx bx-check-shield"></i> reliable</span>
+          </div>
+
+          <div class="dash-card stat-card" data-aos="fade-up" data-aos-delay="120">
+            <span class="stat-icon"><i class="bx bx-rocket"></i></span>
+            <span class="metric-num" data-target="30" data-prefix="~" data-suffix="%">0</span>
+            <span class="metric-label">Faster deploys</span>
+            <span class="stat-trend up"><i class="bx bx-trending-up"></i> CI/CD</span>
+          </div>
+
+          <div class="dash-card stat-card" data-aos="fade-up" data-aos-delay="180">
+            <span class="stat-icon"><i class="bx bx-shield-quarter"></i></span>
+            <span class="metric-num" data-target="90" data-suffix="%">0</span>
+            <span class="metric-label">Fraud-detection gain</span>
+            <span class="stat-trend up"><i class="bx bx-trending-up"></i> impact</span>
+          </div>
+
+          <!-- Donut: expertise distribution -->
+          <div class="dash-card chart-card donut-card" data-aos="fade-up">
+            <div class="card-head"><i class="bx bx-doughnut-chart"></i> Expertise mix</div>
+            <div class="donut-body">
+              <div class="donut-wrap">
+                <svg class="donut" viewBox="0 0 42 42" aria-label="Expertise distribution">
+                  <circle class="donut-ring" cx="21" cy="21" r="15.915"></circle>
+                  <circle class="donut-seg seg-1" cx="21" cy="21" r="15.915" data-value="40" stroke-dasharray="0 100" stroke-dashoffset="25"></circle>
+                  <circle class="donut-seg seg-2" cx="21" cy="21" r="15.915" data-value="25" stroke-dasharray="0 100" stroke-dashoffset="25"></circle>
+                  <circle class="donut-seg seg-3" cx="21" cy="21" r="15.915" data-value="20" stroke-dasharray="0 100" stroke-dashoffset="25"></circle>
+                  <circle class="donut-seg seg-4" cx="21" cy="21" r="15.915" data-value="15" stroke-dasharray="0 100" stroke-dashoffset="25"></circle>
+                </svg>
+                <div class="donut-center"><strong>7+</strong><span>years</span></div>
+              </div>
+              <ul class="exp-legend">
+                <li>
+                  <span class="exp-row"><span class="dot dot-1"></span> Backend &amp; APIs <em>40%</em></span>
+                  <span class="exp-track"><span class="exp-fill f-1" data-pct="40"></span></span>
+                </li>
+                <li>
+                  <span class="exp-row"><span class="dot dot-2"></span> Cloud &amp; DevOps <em>25%</em></span>
+                  <span class="exp-track"><span class="exp-fill f-2" data-pct="25"></span></span>
+                </li>
+                <li>
+                  <span class="exp-row"><span class="dot dot-3"></span> Distributed systems <em>20%</em></span>
+                  <span class="exp-track"><span class="exp-fill f-3" data-pct="20"></span></span>
+                </li>
+                <li>
+                  <span class="exp-row"><span class="dot dot-4"></span> AI / LLM &amp; RAG <em>15%</em></span>
+                  <span class="exp-track"><span class="exp-fill f-4" data-pct="15"></span></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Pillar: AI / ML -->
+          <div class="dash-card pillar-card pillar-ai" data-aos="fade-up" data-aos-delay="60">
+            <div class="card-head"><i class="bx bx-brain"></i> AI / ML Engineering</div>
+            <ul class="skill-bars">
+              <li><span class="sb-label">LLMs &amp; RAG</span><span class="sb-track"><span class="sb-fill sb-ai" data-pct="85"></span></span><span class="sb-val">85</span></li>
+              <li><span class="sb-label">AI Agents</span><span class="sb-track"><span class="sb-fill sb-ai" data-pct="82"></span></span><span class="sb-val">82</span></li>
+              <li><span class="sb-label">LangChain</span><span class="sb-track"><span class="sb-fill sb-ai" data-pct="80"></span></span><span class="sb-val">80</span></li>
+              <li><span class="sb-label">Vector DBs / Embeddings</span><span class="sb-track"><span class="sb-fill sb-ai" data-pct="78"></span></span><span class="sb-val">78</span></li>
+            </ul>
+            <div class="pillar-tags">
+              <span>Ollama</span><span>ChromaDB</span><span>Prompt Eng.</span><span>Multi-model</span>
+            </div>
+          </div>
+
+          <!-- Pillar: Backend Engineering -->
+          <div class="dash-card pillar-card pillar-backend" data-aos="fade-up" data-aos-delay="120">
+            <div class="card-head"><i class="bx bx-server"></i> Backend Engineering</div>
+            <ul class="skill-bars">
+              <li><span class="sb-label">Python</span><span class="sb-track"><span class="sb-fill" data-pct="92"></span></span><span class="sb-val">92</span></li>
+              <li><span class="sb-label">FastAPI / Flask</span><span class="sb-track"><span class="sb-fill" data-pct="90"></span></span><span class="sb-val">90</span></li>
+              <li><span class="sb-label">Distributed Systems</span><span class="sb-track"><span class="sb-fill" data-pct="86"></span></span><span class="sb-val">86</span></li>
+              <li><span class="sb-label">REST APIs / Microservices</span><span class="sb-track"><span class="sb-fill" data-pct="88"></span></span><span class="sb-val">88</span></li>
+            </ul>
+            <div class="pillar-tags">
+              <span>PostgreSQL</span><span>MongoDB</span><span>Redis</span><span>Celery</span>
+            </div>
+          </div>
+
+          <!-- Pillar: DevOps & Cloud -->
+          <div class="dash-card pillar-card pillar-devops" data-aos="fade-up" data-aos-delay="180">
+            <div class="card-head"><i class="bx bx-cog"></i> DevOps &amp; Cloud</div>
+            <ul class="skill-bars">
+              <li><span class="sb-label">AWS Cloud</span><span class="sb-track"><span class="sb-fill sb-ops" data-pct="88"></span></span><span class="sb-val">88</span></li>
+              <li><span class="sb-label">Docker / Kubernetes</span><span class="sb-track"><span class="sb-fill sb-ops" data-pct="85"></span></span><span class="sb-val">85</span></li>
+              <li><span class="sb-label">CI/CD (GitLab)</span><span class="sb-track"><span class="sb-fill sb-ops" data-pct="87"></span></span><span class="sb-val">87</span></li>
+              <li><span class="sb-label">IaC (CDK / CFN)</span><span class="sb-track"><span class="sb-fill sb-ops" data-pct="82"></span></span><span class="sb-val">82</span></li>
+            </ul>
+            <div class="pillar-tags">
+              <span>ECS/Fargate</span><span>Datadog</span><span>Nginx</span><span>Image Builder</span>
+            </div>
+          </div>
+
+          <!-- Recognition / highlights -->
+          <div class="dash-card list-card" data-aos="fade-up" data-aos-delay="60">
+            <div class="card-head"><i class="bx bx-trophy"></i> Recognition</div>
+            <ul class="mini-list">
+              <li><i class="bx bx-medal"></i> High Flyer Award &times;2 <span>Honda / KPIT</span></li>
+              <li><i class="bx bx-star"></i> High CSAT <span>2024</span></li>
+              <li><i class="bx bx-check-circle"></i> Meta Back-End Cert <span>Coursera</span></li>
+              <li><i class="bx bx-check-circle"></i> Deep Learning <span>97% grade</span></li>
+            </ul>
+          </div>
+
+          <!-- Currently exploring -->
+          <div class="dash-card list-card" data-aos="fade-up" data-aos-delay="120">
+            <div class="card-head"><i class="bx bx-bulb"></i> Currently exploring</div>
+            <ul class="mini-list">
+              <li><i class="bx bx-git-merge"></i> Agentic AI workflows <span>building</span></li>
+              <li><i class="bx bx-cube"></i> Kubernetes at scale <span>deepening</span></li>
+              <li><i class="bx bx-data"></i> Vector search &amp; RAG evals <span>learning</span></li>
+              <li><i class="bx bx-shield"></i> Platform security <span>practicing</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Flagship projects — dedicated balanced strip -->
+        <div class="dash-flagships">
+          <a href="https://quickbytes.dev" target="_blank" rel="noopener noreferrer" class="dash-card flagship" data-aos="fade-up">
+            <span class="flagship-badge flagship-badge--live">Live</span>
+            <span class="flagship-name">QuickBytes</span>
+            <span class="flagship-desc">Full-stack platform on Cloud Run &middot; FastAPI + Next.js</span>
+          </a>
+          <a href="#portfolio" class="dash-card flagship flagship-scroll" data-aos="fade-up" data-aos-delay="60">
+            <span class="flagship-badge flagship-badge--ai">AI</span>
+            <span class="flagship-name">AlphaBot</span>
+            <span class="flagship-desc">Agentic AI assistant &middot; RAG + LangChain</span>
+          </a>
+          <a href="#portfolio" class="dash-card flagship flagship-scroll" data-aos="fade-up" data-aos-delay="120">
+            <span class="flagship-badge flagship-badge--cloud">Cloud</span>
+            <span class="flagship-name">Golden-AMI Image Factory</span>
+            <span class="flagship-desc">EC2 Image Builder + CDK &middot; 40 min &rarr; seconds</span>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- Scroll-down indicator -->
     <a href="#timeline" class="scroll-down scrollto" aria-label="Scroll down">
-      <span class="scroll-down-text">Scroll</span>
+      <span class="scroll-down-text">Explore</span>
       <span class="scroll-down-icon">
         <i class="bx bx-chevron-down"></i>
       </span>
@@ -701,27 +815,6 @@
   </main>
   <!-- End #main -->
 
-  <!-- ======= Deck Navigation Controls ======= -->
-  <button id="deck-prev" class="deck-arrow deck-arrow--prev" type="button" aria-label="Previous slide">
-    <i class="bx bx-chevron-left"></i>
-  </button>
-  <button id="deck-next" class="deck-arrow deck-arrow--next" type="button" aria-label="Next slide">
-    <i class="bx bx-chevron-right"></i>
-  </button>
-
-  <nav id="deck-dots" class="deck-dots" aria-label="Slide navigation"></nav>
-
-  <div class="deck-counter">
-    <span id="deck-current">1</span> / <span id="deck-total">6</span>
-  </div>
-
-  <div id="deck-hint" class="deck-hint">
-    <i class="bx bx-right-arrow-alt"></i>
-    <span>Use the arrows (or &larr; &rarr; keys) to explore</span>
-  </div>
-
-  <!-- Footer removed to avoid overlap with sidebar controls -->
-
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
 
@@ -739,29 +832,17 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!-- Deck / Slideshow navigation -->
-  <script src="assets/js/slides.js?v=3"></script>
-
   <!-- Fluid Scroll Effects -->
   <script src="assets/js/fluid-scroll.js"></script>
 
   <!-- Cursor Effect -->
   <script src="assets/js/cursor-effect.js"></script>
 
-  <!-- Music Control -->
-  <script src="assets/js/music-control.js"></script>
-
-  <!-- Welcome Modal -->
-  <script src="assets/js/welcome-modal.js"></script>
-
   <!-- Matrix Rain Effect -->
   <script src="assets/js/matrix-rain.js"></script>
 
-  <!-- Floating Sparks / Fireflies -->
-  <script src="assets/js/sparks.js"></script>
-
-  <!-- Sidebar Ambient Smoke -->
-  <script src="assets/js/sidebar-smoke.js"></script>
+  <!-- Hero Summary Dashboard animations -->
+  <script src="assets/js/hero-hook.js?v=8"></script>
 
   <script>
     // Add the "loaded" class to the body element when the page is fully loaded

@@ -1,81 +1,107 @@
 /**
- * Matrix Digital Rain Effect
+ * Matrix Digital Rain — themed background
+ *
+ * Runs continuously as a subtle background behind the hero (not gated behind
+ * the old "matrix-mode"). Recoloured from green to the site's theme palette
+ * (sky-blue with occasional violet + amber glyphs). Kept low-opacity so it
+ * reads as ambient texture, never a distraction.
+ *
+ * Respects prefers-reduced-motion and pauses when the tab is hidden.
  */
-const canvas = document.getElementById('matrix-canvas');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
+(function () {
+  const canvas = document.getElementById('matrix-canvas');
+  if (!canvas) return;
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%\"\'#&_(),.;:?!\\|{}<>[]^~';
-    const fontSize = 16;
-    const columns = Math.floor(width / fontSize);
+  // Theme colours (sky-blue mostly, with rare violet + amber accents)
+  const COLORS = [
+    'rgba(56, 189, 248, ALPHA)',   // sky (primary)
+    'rgba(56, 189, 248, ALPHA)',   // sky (weighted heavier)
+    'rgba(125, 211, 252, ALPHA)',  // bright sky
+    'rgba(167, 139, 250, ALPHA)',  // violet accent
+    'rgba(251, 191, 36, ALPHA)',   // amber accent (rare)
+  ];
 
-    const drops = [];
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%<>[]{}|/\\';
+  const fontSize = 16;
+
+  let width, height, columns;
+  let drops = [];
+  let colColor = [];
+  let animationId = null;
+
+  function setup() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    columns = Math.floor(width / fontSize);
+    drops = new Array(columns);
+    colColor = new Array(columns);
     for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
+      drops[i] = Math.random() * -height / fontSize; // stagger starts
+      colColor[i] = COLORS[(Math.random() * COLORS.length) | 0];
     }
+  }
 
-    let animationId = null;
+  function draw() {
+    // Trailing fade uses the theme's deep-navy base instead of black,
+    // so the rain blends into the background rather than dimming to black.
+    ctx.fillStyle = 'rgba(13, 21, 38, 0.08)';
+    ctx.fillRect(0, 0, width, height);
 
-    function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, width, height);
+    ctx.font = fontSize + 'px monospace';
 
-        ctx.fillStyle = '#00FF41';
-        ctx.font = fontSize + 'px monospace';
+    for (let i = 0; i < drops.length; i++) {
+      const text = characters.charAt((Math.random() * characters.length) | 0);
+      // Low alpha keeps it subtle; the leading glyph is a touch brighter.
+      ctx.fillStyle = colColor[i].replace('ALPHA', '0.45');
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        for (let i = 0; i < drops.length; i++) {
-            const text = characters.charAt(Math.floor(Math.random() * characters.length));
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            if (drops[i] * fontSize > height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-
-            drops[i]++;
+      if (drops[i] * fontSize > height && Math.random() > 0.975) {
+        drops[i] = 0;
+        // occasionally re-roll the column colour for variety
+        if (Math.random() > 0.7) {
+          colColor[i] = COLORS[(Math.random() * COLORS.length) | 0];
         }
+      }
+      drops[i]++;
     }
+  }
 
-    function animate() {
-        if (document.body.classList.contains('matrix-mode')) {
-            draw();
-            animationId = requestAnimationFrame(animate);
-        } else {
-            ctx.clearRect(0, 0, width, height);
-            cancelAnimationFrame(animationId);
-            animationId = null;
-        }
+  function animate() {
+    draw();
+    animationId = requestAnimationFrame(animate);
+  }
+
+  function start() {
+    if (animationId == null) animationId = requestAnimationFrame(animate);
+  }
+  function stop() {
+    if (animationId != null) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
     }
+  }
 
-    window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        const newColumns = Math.floor(width / fontSize);
-        if (newColumns > drops.length) {
-            for (let i = drops.length; i < newColumns; i++) {
-                drops[i] = 1;
-            }
-        }
-    });
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setup, 150);
+  });
 
-    // Watch for class changes on body to start/stop animation
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class') {
-                if (document.body.classList.contains('matrix-mode')) {
-                    if (!animationId) animate();
-                } else {
-                    if (animationId) {
-                        cancelAnimationFrame(animationId);
-                        animationId = null;
-                        ctx.clearRect(0, 0, width, height);
-                    }
-                }
-            }
-        });
-    });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else start();
+  });
 
-    observer.observe(document.body, { attributes: true });
-}
+  setup();
+
+  if (reduceMotion) {
+    // Draw a single static frame, no animation.
+    draw();
+  } else {
+    start();
+  }
+})();

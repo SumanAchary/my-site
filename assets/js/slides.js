@@ -116,6 +116,11 @@
 
     dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
 
+    // Matrix rain is a hero-only background: mark when the hero slide is active
+    // so CSS can fade the rain down on content slides.
+    var activeSlide = slides[index];
+    document.body.classList.toggle("on-hero", !!activeSlide && activeSlide.id === "hero");
+
     if (curEl) curEl.textContent = String(index + 1);
 
     prevBtn.disabled = index === 0;

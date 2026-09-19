@@ -15,43 +15,54 @@
      Gold = the ancient soul, Cyan = the Tron current.
      ============================================================ */
 
-  /* Neon-cyan current (Tron) */
-  --accent: #22e0e0;
-  /* Electric cyan */
-  --accent-2: #46f0ff;
-  /* Bright cyan */
-  --accent-dark: #12b8c4;
+  /* ============================================================
+     MIDNIGHT PLATFORM — deep navy-slate with sky-cyan + violet + amber.
+     Premium dark-tech look, lifted out of near-black so it reads clean
+     and modern (developer-platform vibe), not muddy.
+     ============================================================ */
 
-  /* Sacred gold (ancient India) */
-  --gold: #d4af37;
-  --gold-2: #f2d16b;
-  /* Bright temple gold */
-  --gold-soft: rgba(212, 175, 55, 0.16);
+  /* Sky-cyan current (primary accent) */
+  --accent: #38bdf8;
+  /* Sky blue */
+  --accent-2: #7dd3fc;
+  /* Bright sky highlight */
+  --accent-dark: #0ea5e9;
 
-  /* Aliases so existing rules resolve to the fusion palette */
+  /* Violet (secondary energy — pairs with AI) */
+  --violet: #a78bfa;
+  --violet-2: #c4b5fd;
+
+  /* Warm amber (replaces the old gold — friendlier, still premium) */
+  --gold: #fbbf24;
+  --gold-2: #fcd34d;
+  /* Bright amber */
+  --gold-soft: rgba(251, 191, 36, 0.16);
+
+  /* Aliases so existing rules resolve to the new palette */
   --secondary: var(--gold);
   --secondary-2: var(--gold-2);
-  --secondary-dark: #b8912f;
-  --accent-soft: rgba(34, 224, 224, 0.10);
+  --secondary-dark: #d99a1c;
+  --accent-soft: rgba(56, 189, 248, 0.12);
 
-  /* Temple-night surfaces (dark) */
-  --bg-0: #05070f;
-  /* Near-black indigo night */
-  --bg-1: #080b18;
-  --drawer: #070a16;
-  --navy: #0b1024;
-  --surface: rgba(18, 24, 46, 0.55);
-  /* Dark glass panel */
-  --surface-2: rgba(20, 28, 52, 0.7);
-  --surface-alt: rgba(255, 255, 255, 0.02);
-  --border-soft: rgba(34, 224, 224, 0.18);
-  /* Cyan hairline */
-  --border-gold: rgba(212, 175, 55, 0.4);
+  /* Midnight surfaces — deep navy-slate, not black */
+  --bg-0: #0d1526;
+  /* Deep navy-slate base */
+  --bg-1: #111c33;
+  /* Slightly lighter gradient bottom */
+  --drawer: #0f1a30;
+  --navy: #16233f;
+  --surface: rgba(30, 41, 66, 0.6);
+  /* Lifted glass panel */
+  --surface-2: rgba(36, 49, 78, 0.72);
+  --surface-alt: rgba(255, 255, 255, 0.035);
+  --border-soft: rgba(56, 189, 248, 0.22);
+  /* Sky hairline */
+  --border-gold: rgba(251, 191, 36, 0.4);
 
-  /* Text (light on dark) */
-  --ink: rgba(224, 232, 246, 0.82);
-  --muted: rgba(190, 200, 222, 0.6);
-  --heading: #eaf4ff;
+  /* Text — higher contrast so it reads clearly on the lifted background */
+  --ink: #dce4f5;
+  --muted: #9fb0cc;
+  --heading: #f1f6ff;
 
   /* Fonts — clean, modern */
   --font-display: "Poppins", system-ui, sans-serif;
@@ -62,12 +73,12 @@
   --radius-md: 4px;
   --radius-lg: 6px;
 
-  /* Glow-based "shadows" (Tron edge lighting) */
-  --shadow-sm: 0 0 0 1px rgba(34, 224, 224, 0.14), 0 4px 14px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 0 0 1px rgba(34, 224, 224, 0.22), 0 8px 26px rgba(0, 0, 0, 0.55);
-  --shadow-lg: 0 0 0 1px rgba(34, 224, 224, 0.3), 0 16px 40px rgba(0, 0, 0, 0.6);
-  --glow-cyan: 0 0 18px rgba(34, 224, 224, 0.55);
-  --glow-gold: 0 0 18px rgba(212, 175, 55, 0.5);
+  /* Glow-based "shadows" (soft edge lighting) */
+  --shadow-sm: 0 0 0 1px rgba(56, 189, 248, 0.14), 0 4px 14px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 0 0 1px rgba(56, 189, 248, 0.22), 0 8px 26px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 0 0 1px rgba(56, 189, 248, 0.3), 0 16px 40px rgba(0, 0, 0, 0.5);
+  --glow-cyan: 0 0 18px rgba(56, 189, 248, 0.5);
+  --glow-gold: 0 0 18px rgba(251, 191, 36, 0.5);
   --glow: var(--glow-cyan);
 }
 
@@ -78,6 +89,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Offset anchor jumps so section tops aren't hidden behind the fixed topbar */
+  scroll-padding-top: 80px;
 }
 
 #scroll-progress {
@@ -736,10 +749,13 @@ input:checked+.slider:before {
 
 /* Content offset for the fixed drawer */
 #main {
-  margin-left: 300px;
+  margin-left: 0;
   position: relative;
   z-index: 1;
-  /* sit above the sparks canvas */
+  /* Opaque themed background so it sits above (and hides) the matrix-rain
+     canvas — the matrix is meant to show only behind the hero. */
+  background-color: var(--bg-0);
+  background-image: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
 }
 
 .container,
@@ -859,25 +875,16 @@ input:checked+.slider:before {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
   min-height: 100vh;
-  background-image: url("../img/hero-bg.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#hero:before {
-  content: "";
-  /* Very light wash — the photo stays clear. Text contrast comes from the
-     dark panel behind the hero-content block. */
-  background: rgba(5, 8, 18, 0.08);
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+  position: relative;
+  /* No photo — the hero is a themed summary dashboard. The background is
+     mostly transparent so the fixed matrix-rain canvas shows through here.
+     Soft radial glows + a light wash keep the cards readable over the rain. */
+  background-color: transparent;
+  background-image:
+    radial-gradient(50vw 50vw at 18% 8%, rgba(56, 189, 248, 0.12), transparent 55%),
+    radial-gradient(48vw 48vw at 100% 20%, rgba(167, 139, 250, 0.12), transparent 55%),
+    linear-gradient(180deg, rgba(13, 21, 38, 0.55) 0%, rgba(17, 28, 51, 0.72) 100%);
 }
 
 #hero .hero-container {
@@ -1066,48 +1073,11 @@ input:checked+.slider:before {
 }
 
 @media (max-width: 768px) {
-  #hero {
-    /* Dedicated mobile background photo. */
-    background: url("../img/mobile-hero-bg.jpg") top center;
-    background-size: cover;
-  }
-
-  /* Smaller, more precise text so it doesn't dominate the screen. */
-  #hero h1 {
-    font-size: 34px;
-    line-height: 1.12;
-    letter-spacing: -0.3px;
-  }
-
-  #hero h1::after {
-    width: 60px;
-    margin: 16px auto;
-  }
-
+  /* No photo on mobile — the hero keeps the same themed dashboard background
+     as desktop (set on #hero above). */
   #hero p {
     font-size: 15px;
     line-height: 1.5;
-  }
-
-  #hero h2 {
-    font-size: 16px;
-    line-height: 22px;
-    margin-bottom: 24px;
-  }
-
-  /* Compact, lighter glass card that lets the mobile-hero-bg show through
-     instead of covering it with a big opaque panel. */
-  .hero-content {
-    padding: 22px 20px;
-    max-width: 340px;
-    /* Slightly darker on mobile for stronger text contrast over the photo. */
-    background: rgba(8, 12, 26, 0.5);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border-radius: 14px;
-    /* Lift the card up ~30% of the viewport so it clears the face in
-       mobile-hero-bg instead of sitting dead center over it. */
-    transform: translateY(-30vh);
   }
 }
 
@@ -2239,13 +2209,13 @@ body.matrix-mode #sparks-canvas {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  display: none;
-  background: #000;
-}
-
-body.matrix-mode #matrix-canvas {
+  z-index: 0;
   display: block;
+  background: transparent;
+  pointer-events: none;
+  /* Visible behind the hero dashboard; content sits above it. */
+  opacity: 0.85;
+  transition: opacity 0.5s ease;
 }
 
 body.matrix-mode {
